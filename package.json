@@ -1,0 +1,65 @@
+{
+  "name": "expressjs-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "bootstrap-sass": "^3.3.7",
+    "connect-livereload": "^0.6.0",
+    "dotenv": "^2.0.0",
+    "flexslider": "^2.6.3",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cache": "^0.4.5",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-eslint": "^2.1.0",
+    "gulp-htmlmin": "^1.3.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-live-server": "0.0.30",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-size": "^1.3.0",
+    "gulp-sourcemaps": "^1.9.0",
+    "gulp-useref": "^3.1.2",
+    "gulp-webpack": "^1.5.0",
+    "jquery": "^3.1.1",
+    "sweetalert": "^1.1.3"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.2.0",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "lodash": "^4.17.2",
+    "morgan": "^1.7.0",
+    "serve-favicon": "^2.3.2"
+  }
+}

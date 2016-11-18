@@ -1,0 +1,26 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>expressjs-boilerplate</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body>
+    <%- include('partials/header'); %>
+
+    <div class="container">
+      <%- defineContent('highlight')%>
+      <%- include('partials/messages'); %>
+      <%- body %>
+    </div>
+
+    <%- include('partials/footer'); %>
+
+    <script src="scripts/main.js"></script>
+    <%- defineContent('scripts')%>
+  </body>
+</html>
