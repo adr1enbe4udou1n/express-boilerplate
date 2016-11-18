@@ -4,8 +4,8 @@ Framework Web de base pour des sites Front sans Backend ou prototypes.
 
 ## Installation
 
-1. Installation du client gulp `npm install -g gulp-cli`
-2. Lancer la commande `npm install` sur le répertoire du projet
+1. Installation des outils client nécessaires `npm install -g yarn gulp-cli`
+2. Lancer la commande `yarn` sur le répertoire du projet
 3. Puis démarrer l'application par `gulp serve`
 4. Le site prototype doit être accessible sur localhost:3000
 
