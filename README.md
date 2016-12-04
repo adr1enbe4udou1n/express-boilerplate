@@ -26,4 +26,4 @@ Autoloading is enabled for all assets, expressjs routes and ejs views.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
