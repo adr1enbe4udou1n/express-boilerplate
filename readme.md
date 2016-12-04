@@ -1,19 +1,25 @@
-# Base ExpressJS
+# ExpressJS Boilerplate
 
-Framework Web de base pour des sites Front sans Backend ou prototypes.
+Lite Frontend framework based on Bootstrap for pure showcase/prototype sites
 
-## Installation
+## Install
 
-1. Installation des outils client nécessaires `npm install -g yarn gulp-cli`
-2. Lancer la commande `yarn` sur le répertoire du projet
-3. Puis démarrer l'application par `gulp serve`
-4. Le site prototype doit être accessible sur localhost:3000
+1. Fork and clone this repository
+2. If not yet done, get Yarn and Gulp globally with `npm -g i yarn gulp-cli`
+3. Launch this commands `yarn` on root project
 
-L'autoloading est actif sur l'ensemble des fichiers assets et fichiers serveurs (routes et vues).
+```shell
+yarn
+gulp serve
+```
 
-## Description de la structure
+Web site should be accessible from localhost:3000
 
-1. `assets` -> Répertoire de base de travail pour l'intégrateur contenant les fichiers Sass et scripts pour la partie cliente
-2. `public` -> Répertoire racine de l'application web, c'est le dossier de destination notamment pour la compilation des assets
-3. `routes` -> Contient les routes et mini-controllers de l'application expressjs
-3. `views` -> Contient les vues EJS, représente le squelette HTML du site
+Autoloading is enabled for all assets, expressjs routes and ejs views.
+
+## Structure
+
+1. `assets` -> Contain sass and js files, compiled with gulp and exported on public directory
+2. `public` -> Web root directory
+3. `routes` -> ExpressJS routes
+3. `views` -> EJS views for HTML layout

@@ -6,13 +6,13 @@ const $ = gulpLoadPlugins();
 
 gulp.task('fonts', () => {
   gulp.src('node_modules/bootstrap-sass/assets/fonts/bootstrap/**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
-    .pipe(gulp.dest('public/fonts'));
+    .pipe(gulp.dest('public/css/fonts'));
 
   gulp.src('node_modules/font-awesome/fonts/**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
-    .pipe(gulp.dest('public/fonts'));
+    .pipe(gulp.dest('public/css/fonts'));
 
   gulp.src('node_modules/flexslider/fonts/**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
-    .pipe(gulp.dest('public/styles/fonts'));
+    .pipe(gulp.dest('public/css/fonts'));
 });
 
 gulp.task('styles', () => {
@@ -26,7 +26,7 @@ gulp.task('styles', () => {
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('public/styles'));
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('scripts', () => {
@@ -35,24 +35,24 @@ gulp.task('scripts', () => {
     .pipe($.babel())
     .pipe($.webpack({
       output: {
-        filename: 'main.js',
+        filename: 'app.js',
       },
       devtool: 'source-map'
     }))
-    .pipe(gulp.dest('public/scripts'));
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('serve', ['fonts', 'styles', 'scripts'], () => {
-  var server = gls.new('bin/www');
+  let server = gls.new('bin/www');
   server.start();
 
   gulp.watch('assets/sass/**/*.scss', ['styles']);
   gulp.watch('assets/js/**/*.js', ['scripts']);
-  gulp.watch(['public/styles/**/*.css', 'public/scripts/**/*.js', 'views/**/*.ejs'], function (file) {
+  gulp.watch(['public/css/**/*.css', 'public/js/**/*.js', 'views/**/*.ejs'], function (file) {
     server.notify.apply(server, [file]);
   });
   gulp.watch(['app.js', 'routes/**/*.js', 'views/**/*.ejs'], function(file) {
-    server.start.bind(server)()
+    server.start.bind(server)();
     server.notify.apply(server, [file]);
   });
 });
