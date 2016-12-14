@@ -1258,21 +1258,21 @@ debug-fabulous@0.0.X:
     lazy-debug-legacy "0.0.X"
     object-assign "4.1.0"
 
-debug@2.X, debug@^2.1.1, debug@^2.2.0, debug@~2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
+debug@2.X, debug@^2.1.1, debug@^2.2.0, debug@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.4.1.tgz#ef2532d2753d282045c13c82ce47a09e56b91d53"
   dependencies:
-    ms "0.7.1"
+    ms "0.7.2"
 
 debug@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-0.8.1.tgz#20ff4d26f5e422cb68a1bacbbb61039ad8c1c130"
 
-debug@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.4.1.tgz#ef2532d2753d282045c13c82ce47a09e56b91d53"
+debug@~2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
-    ms "0.7.2"
+    ms "0.7.1"
 
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
@@ -3116,14 +3116,6 @@ jodid25519@^1.0.0:
 jpegtran-bin@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/jpegtran-bin/-/jpegtran-bin-3.1.0.tgz#e6541eba8d97448282a1f8f80a1b6cc9feea55d0"
-  dependencies:
-    bin-build "^2.0.0"
-    bin-wrapper "^3.0.0"
-    logalot "^2.0.0"
-
-jpegtran-bin@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/jpegtran-bin/-/jpegtran-bin-3.2.0.tgz#f60ecf4ae999c0bdad2e9fbcdf2b6f0981e7a29b"
   dependencies:
     bin-build "^2.0.0"
     bin-wrapper "^3.0.0"
