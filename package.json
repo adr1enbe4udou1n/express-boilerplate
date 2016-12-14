@@ -34,7 +34,7 @@
     "gulp-sourcemaps": "^1.9.0",
     "gulp-useref": "^3.1.2",
     "gulp-webpack": "^1.5.0",
-    "jpegtran-bin": "^3.1.0",
+    "jpegtran-bin": "^3.2.0",
     "jquery": "^3.1.1",
     "sweetalert": "^1.1.3"
   },
@@ -54,7 +54,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
-    "debug": "^2.2.0",
+    "debug": "^2.4.1",
     "dotenv": "^2.0.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
