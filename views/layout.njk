@@ -10,17 +10,17 @@
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <%- include('partials/header'); %>
+    {% include "partials/header.njk" %}
 
     <div class="container">
-      <%- defineContent('highlight')%>
-      <%- include('partials/messages'); %>
-      <%- body %>
+      {% block highlight %}{% endblock %}
+      {% include "partials/messages.njk" %}
+      {% block body %}{% endblock %}
     </div>
 
-    <%- include('partials/footer'); %>
+    {% include "partials/footer.njk" %}
 
     <script src="js/app.js"></script>
-    <%- defineContent('scripts')%>
+    {% block scripts %}{% endblock %}
   </body>
 </html>

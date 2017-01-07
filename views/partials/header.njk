@@ -1,0 +1,12 @@
+{% if currentRoute %}
+<div class="header">
+  <div class="container">
+    <ul class="nav nav-pills pull-right">
+      <li class="{% if currentRoute == 'home' %}active{% endif %}"><a href="/">Home</a></li>
+      <li class="{% if currentRoute == 'about' %}active{% endif %}"><a href="/about">About</a></li>
+      <li class="{% if currentRoute == 'contact' %}active{% endif %}"><a href="/contact">Contact</a></li>
+    </ul>
+    <h3 class="text-muted">express-boilerplate</h3>
+  </div>
+</div>
+{% endif %}
