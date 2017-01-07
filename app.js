@@ -4,7 +4,7 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-let nunjucks = require('nunjucks');
+let expressLayouts = require('express-ejs-layouts');
 
 let routes = require('./routes/web');
 
@@ -13,12 +13,10 @@ let app = express();
 app.use(require('connect-livereload')());
 
 // view engine setup
-app.set('view engine', 'njk');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-nunjucks.configure('views', {
-  autoescape: true,
-  express: app
-});
+app.use(expressLayouts);
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
