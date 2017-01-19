@@ -31,10 +31,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-var blocks = {};
+let blocks = {};
 
 hbs.registerHelper('extend', function(name, context) {
-    var block = blocks[name];
+    let block = blocks[name];
     if (!block) {
         block = blocks[name] = [];
     }
@@ -43,7 +43,7 @@ hbs.registerHelper('extend', function(name, context) {
 });
 
 hbs.registerHelper('block', function(name) {
-    var val = (blocks[name] || []).join('\n');
+    let val = (blocks[name] || []).join('\n');
 
     // clear the block
     blocks[name] = [];
@@ -58,7 +58,7 @@ app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -73,6 +73,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
