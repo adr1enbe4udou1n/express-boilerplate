@@ -1,12 +1,11 @@
 # Express Boilerplate
 
-Lite Frontend framework based on Bootstrap for pure showcase/prototype sites
+Lite Frontend boilerplate based on Bootstrap for pure showcase/prototype sites
 
 ## Install
 
-1. Fork and clone this repository
-2. If not yet done, get Yarn and Gulp globally with `npm -g i yarn gulp-cli`
-3. Launch this commands `yarn` on root project
+1. Get Yarn and Gulp globally with `npm -g i yarn gulp-cli`
+2. Launch :
 
 ```shell
 yarn
@@ -15,14 +14,14 @@ gulp serve
 
 Web site should be accessible from localhost:3000
 
-Autoloading is enabled for all assets, expressjs routes and ejs views.
+Autoloading is enabled for all assets, Express routes and Handlebars views.
 
 ## Structure
 
 1. `assets` -> Contain sass and js files, compiled with gulp and exported on public directory
 2. `public` -> Web root directory
 3. `routes` -> Express routes
-3. `views` -> EJS views for HTML layout
+3. `views` -> Handlebars views for HTML layout
 
 ## License
 
