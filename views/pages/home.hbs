@@ -1,4 +1,4 @@
-<%- contentFor('highlight') %>
+{{#extend "highlight"}}
 <!-- Swiper -->
 <div class="swiper-container">
   <div class="swiper-wrapper">
@@ -16,8 +16,8 @@
   <!-- Add Pagination -->
   <div class="swiper-pagination"></div>
 </div>
+{{/extend}}
 
-<%- contentFor('body') %>
 <div class="row marketing">
   <h4>HTML5 Boilerplate</h4>
   <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
@@ -33,7 +33,7 @@
   <button class="btn btn-default sweet">Sweet !</button>
 </div>
 
-<%- contentFor('scripts') %>
+{{#extend "scripts"}}
 <script>
   var swiper = new Swiper('.swiper-container', {
     pagination: '.swiper-pagination',
@@ -44,3 +44,4 @@
   	swal("Oops...", "Something went wrong!", "error");
   });
 </script>
+{{/extend}}

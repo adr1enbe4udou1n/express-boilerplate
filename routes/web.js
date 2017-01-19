@@ -3,7 +3,7 @@ let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('pages/home', { currentRoute: 'home', message: {
+  res.render('pages/home', { message: {
     body: 'Yeaaah!',
     type: 'success'
   }});
@@ -11,12 +11,12 @@ router.get('/', function(req, res, next) {
 
 /* Contact about page. */
 router.get('/about', function(req, res, next) {
-  res.render('pages/about', { currentRoute: 'about' });
+  res.render('pages/about');
 });
 
 /* Contact contact page. */
 router.get('/contact', function(req, res, next) {
-  res.render('pages/contact', { currentRoute: 'contact', message: {
+  res.render('pages/contact', { message: {
     body: 'Enter a valid email address',
     type: 'danger'
   }});
