@@ -11,7 +11,7 @@ gulp.task('fonts', () => {
   gulp.src('node_modules/font-awesome/fonts/**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .pipe(gulp.dest('public/css/fonts'));
 
-  gulp.src('node_modules/flexslider/fonts/**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
+  gulp.src('node_modules/slick-carousel/slick/fonts/**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .pipe(gulp.dest('public/css/fonts'));
 });
 
