@@ -35,7 +35,12 @@
   });
 
   $('button.sweet').click(function() {
-  	swal("Oops...", "Something went wrong!", "error");
+    swal({
+      title: 'Yo!',
+      text: 'Yeaaah!',
+      type: 'success',
+      confirmButtonText: 'Cool'
+    });
   });
 </script>
 {{/extend}}
