@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -17,7 +19,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/public',
-    filename: 'js/[name].js',
+    filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
     publicPath: '/'
   },
   module: {
@@ -90,11 +92,23 @@ if (production) {
   });
 
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new ExtractTextPlugin('css/[name].css'),
+    new CleanWebpackPlugin(['dist'], {
+      root: __dirname + '/public'
+    }),
+    new ExtractTextPlugin('dist/css/[name].[chunkhash].css'),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
         warnings: false
+      }
+    }),
+    new StatsWriterPlugin({
+      filename: "dist/manifest.json",
+      transform: function (data, opts) {
+        return JSON.stringify({
+          js: data.assetsByChunkName.app[0],
+          css: data.assetsByChunkName.app[1]
+        }, null, 2);
       }
     })
   ]);

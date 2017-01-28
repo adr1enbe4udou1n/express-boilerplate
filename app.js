@@ -74,6 +74,11 @@ hbs.registerHelper('route', function(path) {
     return app.locals.path === path ? 'active' : '';
 });
 
+hbs.registerHelper('manifest', function(name) {
+  let manifest = require('./public/dist/manifest.json');
+  return '/' + manifest[name];
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler

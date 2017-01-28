@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     {{#if production }}
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{{manifest "css"}}}">
     {{/if}}
   </head>
   <body>
@@ -23,7 +23,11 @@
 
     {{> footer }}
 
+    {{#if production }}
+    <script src="{{{manifest "js"}}}"></script>
+    {{else}}
     <script src="/js/app.js"></script>
+    {{/if}}
     {{{block "scripts"}}}
   </body>
 </html>
