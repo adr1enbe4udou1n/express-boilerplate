@@ -1,3 +1,4 @@
+require('dotenv').config();
 const webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -5,18 +6,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
-const hmr = process.argv.includes('--hot');
 
 module.exports = {
   entry: {
     app: [
       './assets/js/app.js',
-      './assets/sass/app.scss'
+      './assets/sass/app.scss',
+      'webpack-hot-middleware/client?reload=true',
     ]
   },
   output: {
-    path: hmr ? '/' : 'public',
-    filename: 'js/[name].js'
+    filename: 'js/[name].js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -72,7 +73,9 @@ module.exports = {
         context: __dirname,
         output: { path: './' }
       }
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
   performance: {
     hints: false

@@ -6,10 +6,35 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let hbs = require('hbs');
 
+// Webpack
+let production = process.env.NODE_ENV === 'production';
+let webpackDevMiddleware = require('webpack-dev-middleware');
+let webpackHotMiddleware = require('webpack-hot-middleware');
+let webpack = require('webpack');
+let config = require('./webpack.config.js');
+
 let routes = require('./routes/web');
 
 let app = express();
 hbs.localsAsTemplateData(app.request);
+
+if (! production) {
+  const compiler = webpack(config);
+
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
+    }
+  }));
+
+  app.use(webpackHotMiddleware(compiler));
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules",
-    "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
-    "hmr": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+    "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules",
+    "watch": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "node ./bin/www"
+    "serve": "cross-env NODE_ENV=development node ./bin/www",
+    "start": "cross-env NODE_ENV=production node ./bin/www"
   },
   "engines": {
     "node": ">=4"
@@ -59,6 +59,8 @@
     "hbs": "^4.0.1",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
-    "serve-favicon": "^2.3.2"
+    "serve-favicon": "^2.3.2",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0"
   }
 }
