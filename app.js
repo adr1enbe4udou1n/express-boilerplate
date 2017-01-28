@@ -11,8 +11,6 @@ let routes = require('./routes/web');
 let app = express();
 hbs.localsAsTemplateData(app.request);
 
-app.use(require('connect-livereload')());
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
