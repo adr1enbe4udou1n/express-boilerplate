@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -61,8 +62,7 @@ module.exports = {
         output: { path: './' }
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new WebpackNotifierPlugin()
   ],
   performance: {
     hints: false
@@ -114,4 +114,9 @@ else {
       'sass-loader?sourceMap&precision=8'
     ]
   });
+
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]);
 }
