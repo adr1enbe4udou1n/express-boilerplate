@@ -5,3 +5,7 @@ require('bootstrap-sass');
 
 require('slick-carousel');
 window.swal = require('sweetalert2');
+
+if (module.hot) {
+  module.hot.accept();
+}

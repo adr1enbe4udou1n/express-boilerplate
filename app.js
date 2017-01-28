@@ -7,7 +7,6 @@ let bodyParser = require('body-parser');
 let hbs = require('hbs');
 
 // Webpack
-let production = process.env.NODE_ENV === 'production';
 let webpackDevMiddleware = require('webpack-dev-middleware');
 let webpackHotMiddleware = require('webpack-hot-middleware');
 let webpack = require('webpack');
@@ -18,7 +17,9 @@ let routes = require('./routes/web');
 let app = express();
 hbs.localsAsTemplateData(app.request);
 
-if (! production) {
+app.locals.production = process.env.NODE_ENV === 'production';
+
+if (! app.locals.production) {
   const compiler = webpack(config);
 
   app.use(webpackDevMiddleware(compiler, {

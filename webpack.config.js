@@ -11,28 +11,16 @@ module.exports = {
   entry: {
     app: [
       './assets/js/app.js',
-      './assets/sass/app.scss',
-      'webpack-hot-middleware/client?reload=true',
+      './assets/sass/app.scss'
     ]
   },
   output: {
+    path: __dirname + '/public',
     filename: 'js/[name].js',
     publicPath: '/'
   },
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            'css-loader',
-            'postcss-loader',
-            'resolve-url-loader',
-            'sass-loader?sourceMap&precision=8'
-          ]
-        }),
-      },
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -53,10 +41,9 @@ module.exports = {
           name: 'fonts/[name].[ext]?[hash]'
         }
       }
-    ],
+    ]
   },
   plugins: [
-    new ExtractTextPlugin('css/[name].css'),
     new CopyWebpackPlugin([
       { from: 'node_modules/bootstrap-sass/assets/fonts/bootstrap', to: 'fonts' },
       { from: 'node_modules/font-awesome/fonts', to: 'fonts' },
@@ -89,12 +76,42 @@ module.exports = {
 };
 
 if (production) {
-  module.exports.plugins.push(
+  module.exports.module.rules.push({
+    test: /\.scss$/,
+    loader: ExtractTextPlugin.extract({
+      fallbackLoader: 'style-loader',
+      loader: [
+        'css-loader',
+        'postcss-loader',
+        'resolve-url-loader',
+        'sass-loader?sourceMap&precision=8'
+      ]
+    })
+  });
+
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new ExtractTextPlugin('css/[name].css'),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
         warnings: false
       }
     })
+  ]);
+}
+else {
+  module.exports.entry.app.push(
+    'webpack-hot-middleware/client'
   );
+
+  module.exports.module.rules.push({
+    test: /\.scss$/,
+    loader: [
+      'style-loader',
+      'css-loader',
+      'postcss-loader',
+      'resolve-url-loader',
+      'sass-loader?sourceMap&precision=8'
+    ]
+  });
 }
