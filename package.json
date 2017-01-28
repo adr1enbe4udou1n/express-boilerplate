@@ -35,7 +35,9 @@
     "sweetalert2": "^6.3.2",
     "uglify-js": "^2.7.5",
     "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-dev-server": "^2.2.0",
+    "webpack-hot-middleware": "^2.15.0"
   },
   "eslintConfig": {
     "env": {
@@ -59,8 +61,6 @@
     "hbs": "^4.0.1",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
-    "serve-favicon": "^2.3.2",
-    "webpack-dev-middleware": "^1.9.0",
-    "webpack-hot-middleware": "^2.15.0"
+    "serve-favicon": "^2.3.2"
   }
 }

@@ -6,12 +6,6 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let hbs = require('hbs');
 
-// Webpack
-let webpackDevMiddleware = require('webpack-dev-middleware');
-let webpackHotMiddleware = require('webpack-hot-middleware');
-let webpack = require('webpack');
-let config = require('./webpack.config.js');
-
 let routes = require('./routes/web');
 
 let app = express();
@@ -20,9 +14,11 @@ hbs.localsAsTemplateData(app.request);
 app.locals.production = process.env.NODE_ENV === 'production';
 
 if (! app.locals.production) {
-  const compiler = webpack(config);
+  // Webpack
+  let config = require('./webpack.config.js');
+  const compiler = require('webpack')(config);
 
-  app.use(webpackDevMiddleware(compiler, {
+  app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath,
     stats: {
       colors: true,
@@ -34,7 +30,7 @@ if (! app.locals.production) {
     }
   }));
 
-  app.use(webpackHotMiddleware(compiler));
+  app.use(require('webpack-hot-middleware')(compiler));
 }
 
 // view engine setup
