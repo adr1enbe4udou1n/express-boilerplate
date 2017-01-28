@@ -13,7 +13,7 @@ hbs.localsAsTemplateData(app.request);
 
 app.locals.production = process.env.NODE_ENV === 'production';
 
-if (! app.locals.production) {
+if (!app.locals.production) {
   // Webpack
   let config = require('./webpack.config.js');
   const compiler = require('webpack')(config);
@@ -42,39 +42,39 @@ hbs.registerPartials(__dirname + '/views/partials');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   app.locals.path = req.path;
   next();
 });
 
 let blocks = {};
 
-hbs.registerHelper('extend', function(name, context) {
-    let block = blocks[name];
-    if (!block) {
-        block = blocks[name] = [];
-    }
+hbs.registerHelper('extend', function (name, context) {
+  let block = blocks[name];
+  if (!block) {
+    block = blocks[name] = [];
+  }
 
-    block.push(context.fn(this));
+  block.push(context.fn(this));
 });
 
-hbs.registerHelper('block', function(name) {
-    let val = (blocks[name] || []).join('\n');
+hbs.registerHelper('block', function (name) {
+  let val = (blocks[name] || []).join('\n');
 
-    // clear the block
-    blocks[name] = [];
-    return val;
+  // clear the block
+  blocks[name] = [];
+  return val;
 });
 
-hbs.registerHelper('route', function(path) {
-    return app.locals.path === path ? 'active' : '';
+hbs.registerHelper('route', function (path) {
+  return app.locals.path === path ? 'active' : '';
 });
 
-hbs.registerHelper('manifest', function(name) {
+hbs.registerHelper('manifest', function (name) {
   let manifest = require('./public/dist/manifest.json');
   return '/' + manifest[name];
 });
@@ -82,14 +82,14 @@ hbs.registerHelper('manifest', function(name) {
 app.use('/', routes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
