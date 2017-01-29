@@ -4,12 +4,11 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-let hbs = require('hbs');
+let hbsInit = require('./hbs');
 
 let routes = require('./routes/web');
 
 let app = express();
-hbs.localsAsTemplateData(app.request);
 
 app.locals.production = process.env.NODE_ENV === 'production';
 
@@ -36,7 +35,7 @@ if (!app.locals.production) {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-hbs.registerPartials(__dirname + '/views/partials');
+hbsInit(app);
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -49,34 +48,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
   app.locals.path = req.path;
   next();
-});
-
-let blocks = {};
-
-hbs.registerHelper('extend', function (name, context) {
-  let block = blocks[name];
-  if (!block) {
-    block = blocks[name] = [];
-  }
-
-  block.push(context.fn(this));
-});
-
-hbs.registerHelper('block', function (name) {
-  let val = (blocks[name] || []).join('\n');
-
-  // clear the block
-  blocks[name] = [];
-  return val;
-});
-
-hbs.registerHelper('route', function (path) {
-  return app.locals.path === path ? 'active' : '';
-});
-
-hbs.registerHelper('manifest', function (name) {
-  let manifest = require('./public/dist/manifest.json');
-  return '/' + manifest[name];
 });
 
 app.use('/', routes);
