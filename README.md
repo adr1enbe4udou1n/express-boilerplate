@@ -17,7 +17,7 @@ npm start
 ```
 
 Just as easy !  
-Web site should be accessible from localhost:3000  
+Web site should be accessible from localhost:3000.  
 Port is configurable by `.env` file settings (just copy `.env.example`).
 
 ## Structure
@@ -29,21 +29,21 @@ Contains frontend js and sass files, compiled by webpack and exported to public 
 Public web root directory. Assets are outputted inside this directory.
 
 3. `routes`  
-Express routes with basic actions callbacks, it's up to you if you prefer dedicated controllers classes outside
+Express routes with basic actions callbacks, it's up to you if you prefer dedicated controllers classes outside.
 4. `views`  
-Handlebars views for HTML layout, with support of `partials`, `extend` and `block` theming
+Handlebars views for HTML layout, with support of `partials`, `extend` and `block` theming.
 
 5. `app.js`  
-Express app initialization (routes, middlewares, etc.)
+Express app initialization (routes, middlewares, etc.).
 
 6. `hbs.js`  
-Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add everything you want
+Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add everything you want.
 
 7. `gulpfile.js`  
-Traditional Gulpfile, now only used for server-side livereload support, which can only working with good reliability thanks to Gulp. Assets are now entirely managed by Webpack
+Traditional Gulpfile, now only used for server-side livereload support, which can only working with good reliability thanks to Gulp. Assets are now entirely managed by Webpack.
 
 8. `webpack.config.js`  
-And of course Webpack configuration file for all assets management, with dev and production environment support
+And of course Webpack configuration file for all assets management, with dev and production environment support.
 
 ## Development
 
