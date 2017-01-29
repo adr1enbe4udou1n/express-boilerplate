@@ -9,36 +9,13 @@ let hbsInit = require('./hbs');
 let routes = require('./routes/web');
 
 let app = express();
-
 app.locals.production = process.env.NODE_ENV === 'production';
-app.locals.hot = process.argv.includes('--hot');
-
-if (app.locals.hot) {
-  // Load Webpack Middleware
-  let config = require('./webpack.config.js');
-  const compiler = require('webpack')(config);
-
-  app.use(require('webpack-dev-middleware')(compiler, {
-    publicPath: config.output.publicPath,
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
-  }));
-
-  app.use(require('webpack-hot-middleware')(compiler));
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbsInit(app);
 
-// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -51,6 +28,38 @@ app.use(function (req, res, next) {
   next();
 });
 
+// specific dev environnement
+if (!app.locals.production) {
+  app.locals.hot = process.argv.includes('--hot');
+
+  // livereload for server-side modification
+  app.use(require('connect-livereload')());
+  let livereload = require('livereload');
+  let server = livereload.createServer();
+  server.watch([__dirname + '/routes', __dirname + '/views']);
+
+  if (app.locals.hot) {
+    // load webpack middleware
+    let config = require('./webpack.config.js');
+    const compiler = require('webpack')(config);
+
+    app.use(require('webpack-dev-middleware')(compiler, {
+      publicPath: config.output.publicPath,
+      stats: {
+        colors: true,
+        hash: false,
+        timings: true,
+        chunks: false,
+        chunkModules: false,
+        modules: false
+      }
+    }));
+
+    app.use(require('webpack-hot-middleware')(compiler));
+  }
+}
+
+// load routes
 app.use('/', routes);
 
 // catch 404 and forward to error handler
