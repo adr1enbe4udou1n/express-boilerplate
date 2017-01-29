@@ -41,7 +41,7 @@ Express app initialization (routes, middlewares, etc.).
 Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add any custom helpers.
 
 * `gulpfile.js`  
-Traditional Gulpfile, now only used for server-side livereload support, which can only working with good reliability thanks to Gulp. Assets are now entirely managed by Webpack.
+Traditional Gulpfile, only used for server-side livereload support, which can only working with good reliability thanks to Gulp. Assets are now entirely managed by Webpack.
 
 * `webpack.config.js`  
 And of course Webpack configuration file for all assets management, with dev and production environment support.
