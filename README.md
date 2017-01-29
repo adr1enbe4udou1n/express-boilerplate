@@ -38,7 +38,7 @@ Handlebars views for HTML layout, with support of `partials`, `extend` and `bloc
 Express app initialization (routes, middlewares, etc.).
 
 * `hbs.js`  
-Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add everything you want.
+Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add any custom helpers.
 
 * `gulpfile.js`  
 Traditional Gulpfile, now only used for server-side livereload support, which can only working with good reliability thanks to Gulp. Assets are now entirely managed by Webpack.
