@@ -2,7 +2,7 @@
 
 > Frontend boilerplate based on Bootstrap for pure showcase/prototype sites. It's based on Express for server routing, Handlebars as rendering views engine with support of `extend` and `block` helpers for flexible layout design, and finally Webpack 2 for assets management.
 
-### Frontend basic features
+## Frontend basic features
 
 1. HTML5 boilerplate with basic home-about-contact pages
 1. Bootstrap Sass 3
