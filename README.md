@@ -15,7 +15,7 @@ Web site should be accessible from localhost:3000, port is configurable by `.env
 
 ## Structure
 
-1. `assets` -> Contain frontend js and sass files, compiled by webpack and exported to public directory
+1. `assets` -> Contains frontend js and sass files, compiled by webpack and exported to public directory
 2. `public` -> Web root directory
 3. `routes` -> Express routes
 3. `views` -> Handlebars views for HTML layout
