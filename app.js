@@ -11,32 +11,12 @@ let routes = require('./routes/web');
 let app = express();
 app.locals.production = process.env.NODE_ENV === 'production';
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-hbsInit(app);
-
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(function (req, res, next) {
-  app.locals.path = req.path;
-  next();
-});
-
 // specific dev environnement
 if (!app.locals.production) {
-  app.locals.hot = process.argv.includes('--hot');
-
   // livereload for server-side modification
   app.use(require('connect-livereload')());
-  let livereload = require('livereload');
-  let server = livereload.createServer();
-  server.watch([__dirname + '/routes', __dirname + '/views']);
+
+  app.locals.hot = process.argv.includes('--hot');
 
   if (app.locals.hot) {
     // load webpack middleware
@@ -58,6 +38,23 @@ if (!app.locals.production) {
     app.use(require('webpack-hot-middleware')(compiler));
   }
 }
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+hbsInit(app);
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function (req, res, next) {
+  app.locals.path = req.path;
+  next();
+});
 
 // load routes
 app.use('/', routes);

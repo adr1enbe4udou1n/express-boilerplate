@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules",
     "watch": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
-    "serve": "cross-env NODE_ENV=development node ./bin/www",
-    "hot": "cross-env NODE_ENV=development node ./bin/www --hot",
+    "serve": "cross-env NODE_ENV=development gulp serve",
+    "hot": "cross-env NODE_ENV=development gulp serve --hot",
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "cross-env NODE_ENV=production node ./bin/www"
   },
@@ -27,8 +27,9 @@
     "file-loader": "^0.10.0",
     "font-awesome": "^4.7.0",
     "friendly-errors-webpack-plugin": "^1.1.2",
+    "gulp": "^3.9.1",
+    "gulp-live-server": "^0.0.30",
     "jquery": "^3.1.1",
-    "livereload": "^0.6.0",
     "lodash": "^4.17.4",
     "node-sass": "^4.4.0",
     "postcss-loader": "^1.2.1",
