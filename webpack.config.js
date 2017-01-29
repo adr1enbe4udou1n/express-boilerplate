@@ -9,6 +9,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const production = process.env.NODE_ENV === 'production';
+const hot = process.argv.includes('--hot');
 
 module.exports = {
   entry: {
@@ -114,10 +115,6 @@ if (production) {
   ]);
 }
 else {
-  module.exports.entry.app.push(
-    'webpack-hot-middleware/client'
-  );
-
   module.exports.module.rules.push({
     test: /\.scss$/,
     loader: [
@@ -129,8 +126,14 @@ else {
     ]
   });
 
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]);
+  if (hot) {
+    module.exports.entry.app.push(
+      'webpack-hot-middleware/client'
+    );
+
+    module.exports.plugins = (module.exports.plugins || []).concat([
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
+    ]);
+  }
 }

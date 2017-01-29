@@ -11,9 +11,10 @@ let routes = require('./routes/web');
 let app = express();
 
 app.locals.production = process.env.NODE_ENV === 'production';
+app.locals.hot = process.argv.includes('--hot');
 
-if (!app.locals.production) {
-  // Webpack
+if (app.locals.hot) {
+  // Load Webpack Middleware
   let config = require('./webpack.config.js');
   const compiler = require('webpack')(config);
 
