@@ -41,32 +41,40 @@ Express app initialization (routes, middlewares, etc.).
 Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add any custom helpers.
 
 * `gulpfile.js`  
-Traditional Gulpfile, only used for server-side livereload support, which can only working with good reliability thanks to Gulp. Assets are now entirely managed by Webpack.
+Traditional Gulpfile for specific development tasks as launch webpack and serve express dev mode. Assets are entirely managed by Webpack.
 
 * `webpack.config.js`  
 And of course Webpack configuration file for all assets management, with dev and production environment support.
 
 ## Development
 
-### Launcher commands
+Though there are pure npm scripts for webpack assets compilations, Gulp is still essential in order to launch Express with livereload support. Install it globally with `npm i -g gulp`.
 
-* `npm run dev`  
+### Commands
+
+* `npm run dev`, alias `gulp dev`  
 Just start Webpack assets compilation in development mode. CSS and JS are bundled into one super heavy JS file.
 
-* `npm run watch`  
+* `npm run watch`, alias `gulp watch`  
 Same as `dev` but with Webpack watcher enabled for frontend assets.
 
-* `npm run serve`  
-Start Express server to development mode with Gulp for server-side livereload support. So don't forget to install it globally before with `npm i -g gulp`. You should use this `serve` command in conjunction with `dev` or `watch` in order to include assets reloading.
+* `gulp livereload`  
+Start Express server to development mode with server-side livereload support. Without options, you'll probably use this command in conjunction with `dev` or `watch` in order to include assets reloading.  
 
-* `npm run hot`  
-Same as `serve` but with seamless webpack integration with Express server in order to support [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/).
+* `gulp livereload --hmr`, alias `gulp hmr`  
+Launch Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. Default port is 5000 and is configurable with environment file.
 
-* `npm run production`  
+* `gulp livereload --browsersync`, alias `gulp browsersync`  
+Launch Browsersync server for synchronization across multiple devices. Default port is 7000 and is configurable with environment file.
+
+* `gulp livereload --hmr --browsersync`, alias `gulp serve`  
+Combine all options for complete livereload, hmr and browsersync developer experience !
+
+* `npm run production`, alias `gulp production`  
 Launch Webpack assets compilation in production mode, including extraction of separated CSS file, minifying and export to dedicated `dist` public folder with chunked hash added to files for cache busting.
 
 * `npm start`  
-Start directly Express server for production environment. In this mode, Express will use optimized assets. So don't forget to compile them for production before if you want serve last updated versions of static files. 
+Start directly Express server for production environment. In this mode, Express will use optimized assets. So don't forget to compile them for production before if you want serve last updated versions of static files.
 
 ### Assets management
 

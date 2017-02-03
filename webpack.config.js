@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -9,7 +10,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const production = process.env.NODE_ENV === 'production';
-const hot = process.argv.includes('--hot');
+const hmr = process.argv.includes('--hmr');
+const browserSync = process.argv.includes('--browsersync');
+
+const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
+const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT, 10);
+const targetPort = browserSync ? browserSyncPort : webpackDevServerPort;
 
 module.exports = {
   entry: {
@@ -21,7 +27,7 @@ module.exports = {
   output: {
     path: __dirname + '/public',
     filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
-    publicPath: '/'
+    publicPath: hmr ? `http://localhost:${targetPort}/` : '/'
   },
   module: {
     rules: [
@@ -70,12 +76,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? '#source-map' : '#inline-source-map',
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    compress: true
-  }
+  devtool: production ? '#source-map' : '#inline-source-map'
 };
 
 if (production) {
@@ -126,9 +127,10 @@ else {
     ]
   });
 
-  if (hot) {
+  if (hmr) {
     module.exports.entry.app.push(
-      'webpack-hot-middleware/client'
+      `webpack-dev-server/client?http://localhost:${targetPort}/`,
+      'webpack/hot/dev-server'
     );
 
     module.exports.plugins = (module.exports.plugins || []).concat([

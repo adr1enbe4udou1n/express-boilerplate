@@ -15,28 +15,6 @@ app.locals.production = process.env.NODE_ENV === 'production';
 if (!app.locals.production) {
   // livereload for server-side modification
   app.use(require('connect-livereload')());
-
-  app.locals.hot = process.argv.includes('--hot');
-
-  if (app.locals.hot) {
-    // load webpack middleware
-    let config = require('./webpack.config.js');
-    const compiler = require('webpack')(config);
-
-    app.use(require('webpack-dev-middleware')(compiler, {
-      publicPath: config.output.publicPath,
-      stats: {
-        colors: true,
-        hash: false,
-        timings: true,
-        chunks: false,
-        chunkModules: false,
-        modules: false
-      }
-    }));
-
-    app.use(require('webpack-hot-middleware')(compiler));
-  }
 }
 
 // view engine setup
