@@ -1,6 +1,6 @@
 # Express Boilerplate
 
-> Frontend boilerplate based on Bootstrap for pure showcase/prototype sites. It's based on Express for server routing, Handlebars as rendering views engine with support of `extend` and `block` helpers for flexible layout design, and finally Webpack 2 for assets management.
+> Frontend boilerplate based on Bootstrap for pure showcase/prototype sites. It's based on Express for server routing, Handlebars as template engine with support of `extend` and `block` helpers for flexible layout design, and finally Webpack 2 for assets management.
 
 ## Frontend sample features
 
