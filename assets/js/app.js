@@ -9,15 +9,8 @@ window.swal = require('sweetalert2');
 /**
  * Example Vue component
  */
-Vue.component('about', require('./components/About.vue'));
+Vue.component('about', require('./components/Panel.vue'));
 
 const app = new Vue({
   el: '#app'
 });
-
-/**
- * Hot reloading
- */
-if (module.hot) {
-  module.hot.accept();
-}

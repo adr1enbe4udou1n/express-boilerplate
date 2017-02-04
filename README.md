@@ -8,6 +8,7 @@
 * Bootstrap Sass 3
 * Slick Carrousel
 * Sweet Alert 2
+* Vue.js components
 
 ## Quick start
 
@@ -23,7 +24,7 @@ Port is configurable by `.env` file settings (just copy `.env.example`).
 ## Structure
 
 * `assets`  
-Contains frontend js and sass files, compiled by webpack and exported to public directory.
+Contains frontend js and sass files, compiled by webpack and exported to public directory. Vue components are settled inside js/components directory.
 
 * `public`  
 Public web root directory. Assets are outputted inside this directory.
@@ -58,16 +59,16 @@ Just start Webpack assets compilation in development mode. CSS and JS are bundle
 * `npm run watch`, alias `gulp watch`  
 Same as `dev` but with Webpack watcher enabled for frontend assets.
 
-* `gulp livereload`  
-Start Express server to development mode with server-side livereload support. Without options, you'll probably use this command in conjunction with `dev` or `watch` in order to include assets reloading.  
+* `gulp serve`  
+Start Express server to development mode with server-side livereload support. Webpack watcher is also launched for autoreloading when assets are updated.  
 
-* `gulp livereload --hmr`, alias `gulp hmr`  
-Launch Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. Default port is 5000 and is configurable with environment file.
+* `gulp serve --bs`, alias `gulp bs`  
+Same as above but with additional Browsersync server for synchronization across multiple devices. Default port is 7000 and is configurable with environment file.
 
-* `gulp livereload --browsersync`, alias `gulp browsersync`  
-Launch Browsersync server for synchronization across multiple devices. Default port is 7000 and is configurable with environment file.
+* `gulp serve --hmr`, alias `gulp hmr`  
+Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. Default port is 5000 and is configurable with environment file.
 
-* `gulp livereload --hmr --browsersync`, alias `gulp serve`  
+* `gulp serve --bs --hmr`, alias `gulp full`  
 Combine all options for complete livereload, hmr and browsersync developer experience !
 
 * `npm run production`, alias `gulp production`  
@@ -86,6 +87,7 @@ Current used main loaders and plugins :
 * `extract-text-webpack-plugin` for CSS file extraction, only used in production mode in order to keep HMR working for CSS while developing
 * `postcss-loader` with `autoprefixer`
 * `sass-loader`
+* `vue-loader` for vue components compilations with HMR support
 
 ## License
 
