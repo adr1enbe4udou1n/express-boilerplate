@@ -23,8 +23,10 @@ function getCompiler() {
   return require('webpack')(config);
 }
 
-function livereload(useHotModuleReplacement = false, useBrowserSync = false) {
+function livereload() {
   process.env.NODE_ENV = 'developement';
+  const useHotModuleReplacement = process.argv.includes('--hmr');
+  const useBrowserSync = process.argv.includes('--browsersync');
 
   // start express app
   let server = gls.new('bin/www');
@@ -91,17 +93,20 @@ gulp.task('production', () => {
 });
 
 gulp.task('livereload', () => {
-  livereload(process.argv.includes('--hmr'), process.argv.includes('--browsersync'));
+  livereload();
 });
 
 gulp.task('hmr', () => {
-  livereload(true);
+  process.argv.push('--hmr');
+  livereload();
 });
 
 gulp.task('browsersync', () => {
-  livereload(false, true);
+  process.argv.push('--browsersync');
+  livereload();
 });
 
 gulp.task('serve', () => {
-  livereload(true, true);
+  process.argv.push('--hmr', '--browsersync');
+  livereload();
 });

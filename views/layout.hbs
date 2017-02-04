@@ -13,15 +13,17 @@
     {{/if}}
   </head>
   <body>
-    {{> header }}
+    <div id="app">
+      {{> header }}
 
-    <div class="container">
-      {{{block "highlight"}}}
-      {{> messages }}
-      {{{body}}}
+      <div class="container">
+        {{{block "highlight"}}}
+        {{> messages }}
+        {{{body}}}
+      </div>
+
+      {{> footer }}
     </div>
-
-    {{> footer }}
 
     {{#if production }}
     <script src="{{{manifest "js"}}}"></script>

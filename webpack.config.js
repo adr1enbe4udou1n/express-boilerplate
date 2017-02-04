@@ -11,11 +11,7 @@ const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const production = process.env.NODE_ENV === 'production';
 const hmr = process.argv.includes('--hmr');
-const browserSync = process.argv.includes('--browsersync');
-
-const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
-const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT, 10);
-const targetPort = browserSync ? browserSyncPort : webpackDevServerPort;
+const port = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
 
 module.exports = {
   entry: {
@@ -27,12 +23,27 @@ module.exports = {
   output: {
     path: __dirname + '/public',
     filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
-    publicPath: hmr ? `http://localhost:${targetPort}/` : '/'
+    publicPath: hmr ? `http://localhost:${port}/` : '/'
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: 'babel-loader?cacheDirectory',
+            scss: 'vue-style-loader!css-loader!sass-loader',
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+          },
+
+          postcss: [
+            require('autoprefixer')
+          ]
+        }
+      },
+      {
+        test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader?cacheDirectory'
       },
@@ -73,6 +84,13 @@ module.exports = {
     }),
     new WebpackNotifierPlugin()
   ],
+  resolve: {
+    extensions: ['*', '.js', '.jsx', '.vue'],
+
+    alias: {
+      'vue$': 'vue/dist/vue.common.js'
+    }
+  },
   performance: {
     hints: false
   },
@@ -129,7 +147,7 @@ else {
 
   if (hmr) {
     module.exports.entry.app.push(
-      `webpack-dev-server/client?http://localhost:${targetPort}/`,
+      `webpack-dev-server/client?http://localhost:${port}/`,
       'webpack/hot/dev-server'
     );
 
