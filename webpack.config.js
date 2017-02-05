@@ -9,8 +9,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const production = process.env.NODE_ENV === 'production';
-const hmr = process.argv.includes('--hmr');
-const port = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
+const hmr = process.env.HMR_ENV !== undefined;
+const port = parseInt(process.env.DEV_PORT, 10);
 
 module.exports = {
   entry: {
@@ -139,10 +139,20 @@ else {
   });
 
   if (hmr) {
-    module.exports.entry.app.push(
-      `webpack-dev-server/client?http://localhost:${port}/`,
-      'webpack/hot/dev-server'
-    );
+    switch(process.env.HMR_ENV) {
+      case 'dev':
+        module.exports.entry.app.push(
+          `webpack-dev-server/client?http://localhost:${port}/`
+        );
+        break;
+      case 'hot':
+        module.exports.entry.app.push(
+          `webpack-hot-middleware/client`
+        );
+        break;
+    }
+
+    module.exports.entry.app.push('webpack/hot/dev-server');
 
     module.exports.plugins = (module.exports.plugins || []).concat([
       new webpack.HotModuleReplacementPlugin(),

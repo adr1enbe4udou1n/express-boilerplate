@@ -63,13 +63,13 @@ Same as `dev` but with Webpack watcher enabled for frontend assets.
 Start Express server to development mode with server-side livereload support. Webpack watcher is also launched for autoreloading when assets are updated.  
 
 * `gulp serve --bs`, alias `gulp bs`  
-Same as above but with additional Browsersync server for synchronization across multiple devices. Default port is 7000 and is configurable with environment file.
+Same as above but with additional Browsersync server for synchronization across multiple devices. Default dev port is 5000 and is configurable with environment file with DEV_PORT variable.
 
 * `gulp serve --hmr`, alias `gulp hmr`  
-Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. Default port is 5000 and is configurable with environment file.
+Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. Same as Browsersync for default port.
 
 * `gulp serve --bs --hmr`, alias `gulp full`  
-Combine all options for complete livereload, hmr and browsersync developer experience !
+Combine all options for complete livereload, hmr and browsersync developer experience ! In this mode, the more featured Browsersync replace Webpack Dev Server, while maintaining HMR thanks to Webpack Hot Middleware.
 
 * `npm run production`, alias `gulp production`  
 Launch Webpack assets compilation in production mode, including extraction of separated CSS file, minifying and export to dedicated `dist` public folder with chunked hash added to files for cache busting.
