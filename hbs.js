@@ -28,7 +28,7 @@ module.exports = function (app) {
   });
 
   hbs.registerHelper('manifest', function (name) {
-    let manifest = require('./public/dist/manifest.json');
+    let manifest = require('./public/assets-manifest.json');
     return '/' + manifest[name];
   });
 };

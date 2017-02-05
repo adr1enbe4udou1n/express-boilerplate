@@ -83,7 +83,6 @@ Because assets bundling are now only managed by Webpack, all configuration take 
 
 Current used main loaders and plugins :
 * `babel-loader` for ES2015 transpilation
-* `copy-webpack-plugin` for fonts and images vendors copy
 * `extract-text-webpack-plugin` for CSS file extraction, only used in production mode in order to keep HMR working for CSS while developing
 * `postcss-loader` with `autoprefixer`
 * `sass-loader`

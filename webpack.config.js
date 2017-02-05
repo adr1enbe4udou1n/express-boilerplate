@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -65,12 +64,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: 'node_modules/bootstrap-sass/assets/fonts/bootstrap', to: 'fonts' },
-      { from: 'node_modules/font-awesome/fonts', to: 'fonts' },
-      { from: 'node_modules/slick-carousel/slick/fonts', to: 'fonts' },
-      { from: 'node_modules/slick-carousel/slick/ajax-loader.gif', to: 'images' }
-    ]),
     new FriendlyErrorsWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: production,
@@ -123,7 +116,7 @@ if (production) {
       }
     }),
     new StatsWriterPlugin({
-      filename: "dist/manifest.json",
+      filename: "assets-manifest.json",
       transform: function (data, opts) {
         return JSON.stringify({
           js: data.assetsByChunkName.app[0],
