@@ -27,8 +27,12 @@ module.exports = function (app) {
     return app.locals.path === path ? 'active' : '';
   });
 
-  hbs.registerHelper('manifest', function (name) {
-    let manifest = require('./public/assets-manifest.json');
-    return '/' + manifest[name];
+  hbs.registerHelper('assets', function (name) {
+    if (app.locals.production) {
+      let manifest = require('./public/assets-manifest.json');
+      return '/' + manifest[name];
+    }
+
+    return name;
   });
 };

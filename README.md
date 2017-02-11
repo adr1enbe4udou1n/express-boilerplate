@@ -54,7 +54,7 @@ Though there are pure npm scripts for webpack assets compilations, Gulp is still
 ### Commands
 
 * `npm run dev`, alias `gulp dev`  
-Start Webpack assets compilation in development mode. CSS and JS are bundled into one super heavy JS file.
+Start Webpack assets compilation in development mode. CSS and JS are bundled into one super heavy app.js file. Main vendors as loadash, jquery, vue,... are splitted into sperated vendor.js file. This is useful for keep them cached after each application updates for end users.
 
 * `npm run watch`, alias `gulp watch`  
 Same as `dev` but with Webpack watcher enabled for frontend assets.

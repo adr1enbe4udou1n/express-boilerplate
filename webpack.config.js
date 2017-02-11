@@ -22,6 +22,14 @@ module.exports = {
     app: [
       './assets/js/app.js',
       './assets/sass/app.scss'
+    ],
+    vendor: [
+      'lodash',
+      'jquery',
+      'vue',
+      'axios',
+      'sweetalert2',
+      'slick-carousel'
     ]
   },
   output: {
@@ -80,7 +88,11 @@ module.exports = {
         output: { path: './' }
       }
     }),
-    new WebpackNotifierPlugin()
+    new WebpackNotifierPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+      minChunks: Infinity
+    })
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx', '.vue'],
@@ -123,9 +135,12 @@ if (production) {
     new StatsWriterPlugin({
       filename: "assets-manifest.json",
       transform: function (data, opts) {
+        console.log(data.assetsByChunkName);
         return JSON.stringify({
-          js: data.assetsByChunkName.app[0],
-          css: data.assetsByChunkName.app[1]
+          '/js/manifest.js': data.assetsByChunkName.manifest[0],
+          '/js/vendor.js': data.assetsByChunkName.vendor[0],
+          '/js/app.js': data.assetsByChunkName.app[0],
+          '/css/app.css': data.assetsByChunkName.app[1]
         }, null, 2);
       }
     })
