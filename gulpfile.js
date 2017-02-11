@@ -1,5 +1,8 @@
 const gulp = require('gulp');
 const gls = require('gulp-live-server');
+const webpackDevServer = require('webpack-dev-server');
+
+require('dotenv').config();
 
 const statsOptions = {
   colors: true,
@@ -10,45 +13,45 @@ const statsOptions = {
   modules: false
 };
 
-const browserSync = require('browser-sync').create();
-
-require('dotenv').config();
-const expressPort = parseInt(process.env.PORT, 10);
-const devPort = parseInt(process.env.DEV_PORT, 10);
-
 function getCompiler() {
   const config = require('./webpack.config.js');
   return require('webpack')(config);
 }
 
-gulp.task('dev', () => {
-  process.env.NODE_ENV = 'developement';
+function webpack(watch = false) {
+  if (watch) {
+    getCompiler().watch({}, (err, stats) => {
+      console.log(stats.toString(statsOptions));
+    });
+
+    return;
+  }
 
   getCompiler().run((err, stats) => {
     console.log(stats.toString(statsOptions));
   });
+}
+
+gulp.task('dev', () => {
+  process.env.NODE_ENV = 'developement';
+
+  webpack();
 });
 
 gulp.task('watch', () => {
   process.env.NODE_ENV = 'developement';
 
-  getCompiler().watch({}, (err, stats) => {
-    console.log(stats.toString(statsOptions));
-  });
+  webpack(true);
 });
 
 gulp.task('production', () => {
   process.env.NODE_ENV = 'production';
 
-  getCompiler().run((err, stats) => {
-    console.log(stats.toString(statsOptions));
-  });
+  webpack();
 });
 
 function serve() {
   process.env.NODE_ENV = 'developement';
-  const useHotModuleReplacement = process.argv.includes('--hmr');
-  const useBrowserSync = process.argv.includes('--bs');
 
   // start express app
   let server = gls.new('bin/www');
@@ -60,61 +63,28 @@ function serve() {
     server.notify.apply(server, [file]);
   });
 
-  if (!useHotModuleReplacement) {
+  if (process.env.DEV_ENV === undefined && process.env.DEV_ENV === 'browsersync') {
     // start webpack watcher
-    getCompiler().watch({}, (err, stats) => {
-      console.log(stats.toString(statsOptions));
-    });
-  }
-
-  if (useBrowserSync) {
-    // start browser init
-    let middlewares = [];
-    if (useHotModuleReplacement) {
-      process.env.HMR_ENV = 'hot';
-      const compiler = getCompiler();
-
-      middlewares.push(
-        require('webpack-dev-middleware')(compiler, {
-          historyApiFallback: true,
-          noInfo: false,
-          compress: true,
-          hot: true,
-          publicPath: compiler.options.output.publicPath,
-          stats: statsOptions
-        }),
-        require('webpack-hot-middleware')(compiler)
-      );
-    }
-
-    browserSync.init({
-      proxy: {
-        target: `localhost:${expressPort}`,
-        middleware: middlewares
-      },
-      port: devPort
-    });
-
+    webpack(true);
     return;
   }
 
-  if (useHotModuleReplacement) {
-    // start webpack dev server with hmr
-    process.env.HMR_ENV = 'dev';
-    const compiler = getCompiler();
+  // start webpack dev server
+  const compiler = getCompiler();
+  const expressPort = parseInt(process.env.PORT, 10);
+  const devPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
 
-    new require('webpack-dev-middleware')(compiler, {
-      historyApiFallback: true,
-      noInfo: false,
-      compress: true,
-      hot: true,
-      publicPath: compiler.options.output.publicPath,
-      proxy: {
-        '/': `http://localhost:${expressPort}`
-      },
-      stats: statsOptions
-    }).listen(devPort);
-  }
+  new webpackDevServer(compiler, {
+    historyApiFallback: true,
+    noInfo: false,
+    compress: true,
+    hot: true,
+    publicPath: compiler.options.output.publicPath,
+    proxy: {
+      '/': `http://localhost:${expressPort}`
+    },
+    stats: statsOptions
+  }).listen(devPort);
 }
 
 gulp.task('serve', () => {
@@ -122,16 +92,16 @@ gulp.task('serve', () => {
 });
 
 gulp.task('hmr', () => {
-  process.argv.push('--hmr');
+  process.env.DEV_ENV = 'hmr';
   serve();
 });
 
 gulp.task('bs', () => {
-  process.argv.push('--bs');
+  process.env.DEV_ENV = 'browsersync';
   serve();
 });
 
 gulp.task('full', () => {
-  process.argv.push('--hmr', '--bs');
+  process.env.DEV_ENV = 'full';
   serve();
 });
