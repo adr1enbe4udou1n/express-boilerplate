@@ -30,9 +30,9 @@ module.exports = function (app) {
   hbs.registerHelper('assets', function (name) {
     if (app.locals.production) {
       let manifest = require('./public/assets-manifest.json');
-      return '/' + manifest[name];
+      return '/' + manifest['/' + name];
     }
 
-    return name;
+    return '/' + name;
   });
 };
