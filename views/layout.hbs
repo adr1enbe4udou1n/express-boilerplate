@@ -8,9 +8,9 @@
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    {{#if production }}
+    {{#unless hmr }}
     <link rel="stylesheet" href="{{{assets "css/app.css"}}}">
-    {{/if}}
+    {{/unless}}
   </head>
   <body>
     <div id="app">

@@ -54,7 +54,7 @@ Though there are pure npm scripts for webpack assets compilations, Gulp is still
 ### Commands
 
 * `npm run dev`, alias `gulp dev`  
-Start Webpack assets compilation in development mode. CSS and JS are bundled into one super heavy app.js file. Main vendors as loadash, jquery, vue,... are splitted into sperated vendor.js file. This is useful for keep them cached after each application updates for end users.
+Start Webpack assets compilation in development mode. CSS file is extracted from JS and main vendors as loadash, jquery, vue, etc. are splitted into sperated vendor.js file. This is useful for keep them cached after each application updates for end users.
 
 * `npm run watch`, alias `gulp watch`  
 Same as `dev` but with Webpack watcher enabled for frontend assets.
@@ -62,14 +62,12 @@ Same as `dev` but with Webpack watcher enabled for frontend assets.
 * `gulp serve`  
 Start Express server to development mode with server-side livereload support. Webpack watcher is also launched for autoreloading when assets are updated.  
 
-* `gulp serve --bs`, alias `gulp bs`  
-Same as above but with additional Browsersync server for synchronization across multiple devices. Default dev port is 7000 and is configurable with environment file by BROWSERSYNC_PORT variable.
+* `gulp bs`  
+Same as above but with additional Browsersync server for synchronization across multiple devices and CSS injection support. Default dev port is 7000 and is configurable with environment file by BROWSERSYNC_PORT variable.
 
-* `gulp serve --hmr`, alias `gulp hmr`  
-Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. Default dev port is 5000 and can be customized with WEBPACKDEVSERVER_PORT variable.
-
-* `gulp serve --bs --hmr`, alias `gulp full`  
-Combine all options for complete livereload, hmr and browsersync developer experience ! In this mode, the more featured Browsersync is used as a superset of Webpack Dev Server which is responsible of HMR functionality.
+* `gulp hmr`  
+Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. This is very useful for vue components which can be hot reloaded without losing client state.  
+CSS are bundled into the app.js file in order to include CSS hot reload. Browsersync is used as a superset of Webpack Dev Server. Default Webpack dev port is 5000 and can be customized with WEBPACKDEVSERVER_PORT variable.
 
 * `npm run production`, alias `gulp production`  
 Launch Webpack assets compilation in production mode, including extraction of separated CSS file, minifying and export to dedicated `dist` public folder with chunked hash added to files for cache busting.

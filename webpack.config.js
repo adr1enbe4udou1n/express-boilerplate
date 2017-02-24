@@ -10,8 +10,8 @@ const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
-const hmr = process.env.DEV_ENV === 'hmr' || process.env.DEV_ENV === 'full';
-const browsersync = process.env.DEV_ENV === 'browsersync' || process.env.DEV_ENV === 'full';
+const hmr = process.env.NODE_ENV === 'hmr';
+const browsersync = hmr || process.env.NODE_ENV === 'browsersync';
 
 const expressPort = parseInt(process.env.PORT, 10);
 const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
@@ -107,7 +107,31 @@ module.exports = {
   devtool: production ? '#source-map' : '#inline-source-map'
 };
 
-if (production) {
+let plugins = [];
+
+if (hmr) {
+  module.exports.module.rules.push({
+    test: /\.scss$/,
+    loader: [
+      'style-loader',
+      'css-loader',
+      'postcss-loader',
+      'resolve-url-loader',
+      'sass-loader?sourceMap&precision=8'
+    ]
+  });
+
+  module.exports.entry.app.push(
+    `webpack-dev-server/client?http://localhost:${webpackDevServerPort}/`,
+    'webpack/hot/dev-server'
+  );
+
+  plugins = [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ];
+}
+else {
   module.exports.module.rules.push({
     test: /\.scss$/,
     loader: ExtractTextPlugin.extract({
@@ -121,67 +145,56 @@ if (production) {
     })
   });
 
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new CleanWebpackPlugin(['dist'], {
-      root: __dirname + '/public'
-    }),
-    new ExtractTextPlugin('dist/css/[name].[chunkhash].css'),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new StatsWriterPlugin({
-      filename: "assets-manifest.json",
-      transform: function (data, opts) {
-        console.log(data.assetsByChunkName);
-        return JSON.stringify({
-          '/js/manifest.js': data.assetsByChunkName.manifest[0],
-          '/js/vendor.js': data.assetsByChunkName.vendor[0],
-          '/js/app.js': data.assetsByChunkName.app[0],
-          '/css/app.css': data.assetsByChunkName.app[1]
-        }, null, 2);
-      }
-    })
-  ]);
-}
-else {
-  module.exports.module.rules.push({
-    test: /\.scss$/,
-    loader: [
-      'style-loader',
-      'css-loader',
-      'postcss-loader',
-      'resolve-url-loader',
-      'sass-loader?sourceMap&precision=8'
-    ]
-  });
-
-  if (hmr) {
-    module.exports.entry.app.push(
-      `webpack-dev-server/client?http://localhost:${webpackDevServerPort}/`,
-      'webpack/hot/dev-server'
-    );
-
-    module.exports.plugins = (module.exports.plugins || []).concat([
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
-    ]);
-  }
-
-  if (browsersync) {
-    module.exports.plugins = (module.exports.plugins || []).concat([
-      new BrowserSyncPlugin(
-        {
-          host: 'localhost',
-          port: browserSyncPort,
-          proxy: `http://localhost:${hmr ? webpackDevServerPort : expressPort}`
-        },
-        {
-          reload: !hmr
+  if (production) {
+    plugins = [
+      new CleanWebpackPlugin(['dist'], {
+        root: __dirname + '/public'
+      }),
+      new ExtractTextPlugin('dist/css/[name].[chunkhash].css'),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+          warnings: false
         }
-      )
-    ]);
+      }),
+      new StatsWriterPlugin({
+        filename: "assets-manifest.json",
+        transform: function (data, opts) {
+          console.log(data.assetsByChunkName);
+          return JSON.stringify({
+            '/js/manifest.js': data.assetsByChunkName.manifest[0],
+            '/js/vendor.js': data.assetsByChunkName.vendor[0],
+            '/js/app.js': data.assetsByChunkName.app[0],
+            '/css/app.css': data.assetsByChunkName.app[1]
+          }, null, 2);
+        }
+      })
+    ];
+  }
+  else {
+    plugins = [
+      new ExtractTextPlugin('css/[name].css')
+    ];
   }
 }
+
+if (browsersync) {
+  plugins.push(
+    new BrowserSyncPlugin(
+      {
+        host: 'localhost',
+        port: browserSyncPort,
+        proxy: `http://localhost:${hmr ? webpackDevServerPort : expressPort}`,
+        files: [
+          'public/js/**/*.js',
+          'public/css/**/*.css'
+        ]
+      },
+      {
+        reload: false
+      }
+    )
+  );
+}
+
+module.exports.plugins = (module.exports.plugins || []).concat(plugins);
