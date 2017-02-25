@@ -38,14 +38,7 @@ function serve() {
   server.start();
 
   // watcher for livereloading express server and browser
-  let filesToWatch = ['app.js', 'routes/**/*', 'views/**/*'];
-
-  if (process.env.NODE_ENV === 'developement') {
-    // add public files for livereloading
-    filesToWatch.push('public/**/*');
-  }
-
-  gulp.watch(filesToWatch, function (file) {
+  gulp.watch(['app.js', 'routes/**/*', 'views/**/*'], function (file) {
     server.start.bind(server)();
     server.notify.apply(server, [file]);
   });
