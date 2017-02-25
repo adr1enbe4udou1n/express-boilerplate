@@ -94,7 +94,7 @@ module.exports = {
     }),
     new BrowserSyncPlugin(
       {
-        host: 'localhost',
+        host: process.env.BROWSERSYNC_HOST || 'localhost',
         port: browserSyncPort,
         proxy: `http://localhost:${hmr ? webpackDevServerPort : expressPort}`,
         files: [
