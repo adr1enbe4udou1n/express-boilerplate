@@ -10,8 +10,7 @@ const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
-const hmr = process.env.NODE_ENV === 'hmr';
-const browsersync = hmr || process.env.NODE_ENV === 'browsersync';
+const hmr = process.env.NODE_ENV === 'hot';
 
 const expressPort = parseInt(process.env.PORT, 10);
 const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
@@ -92,7 +91,21 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
       minChunks: Infinity
-    })
+    }),
+    new BrowserSyncPlugin(
+      {
+        host: 'localhost',
+        port: browserSyncPort,
+        proxy: `http://localhost:${hmr ? webpackDevServerPort : expressPort}`,
+        files: [
+          'public/js/**/*.js',
+          'public/css/**/*.css'
+        ]
+      },
+      {
+        reload: false
+      }
+    )
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx', '.vue'],
@@ -176,25 +189,6 @@ else {
       new ExtractTextPlugin('css/[name].css')
     ];
   }
-}
-
-if (browsersync) {
-  plugins.push(
-    new BrowserSyncPlugin(
-      {
-        host: 'localhost',
-        port: browserSyncPort,
-        proxy: `http://localhost:${hmr ? webpackDevServerPort : expressPort}`,
-        files: [
-          'public/js/**/*.js',
-          'public/css/**/*.css'
-        ]
-      },
-      {
-        reload: false
-      }
-    )
-  );
 }
 
 module.exports.plugins = (module.exports.plugins || []).concat(plugins);

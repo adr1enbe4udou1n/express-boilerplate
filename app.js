@@ -10,7 +10,7 @@ let routes = require('./routes/web');
 
 let app = express();
 app.locals.production = process.env.NODE_ENV === 'production';
-app.locals.hmr = process.env.NODE_ENV === 'hmr';
+app.locals.hmr = process.env.NODE_ENV === 'hot';
 
 // specific dev environnement
 if (!app.locals.production) {

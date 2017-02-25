@@ -32,24 +32,6 @@ function webpack(watch = false) {
   });
 }
 
-gulp.task('dev', () => {
-  process.env.NODE_ENV = 'developement';
-
-  webpack();
-});
-
-gulp.task('watch', () => {
-  process.env.NODE_ENV = 'developement';
-
-  webpack(true);
-});
-
-gulp.task('production', () => {
-  process.env.NODE_ENV = 'production';
-
-  webpack();
-});
-
 function serve() {
   // start express app
   let server = gls('bin/www', {env: {NODE_ENV: process.env.NODE_ENV}});
@@ -68,7 +50,7 @@ function serve() {
     server.notify.apply(server, [file]);
   });
 
-  if (process.env.NODE_ENV !== 'hmr') {
+  if (process.env.NODE_ENV === 'developement') {
     // start webpack watcher
     return webpack(true);
   }
@@ -91,17 +73,26 @@ function serve() {
   }).listen(devPort);
 }
 
-gulp.task('serve', () => {
+gulp.task('dev', () => {
   process.env.NODE_ENV = 'developement';
+
+  webpack();
+});
+
+gulp.task('watch', () => {
+  process.env.NODE_ENV = 'developement';
+
   serve();
 });
 
-gulp.task('bs', () => {
-  process.env.NODE_ENV = 'browsersync';
+gulp.task('hot', () => {
+  process.env.NODE_ENV = 'hot';
+
   serve();
 });
 
-gulp.task('hmr', () => {
-  process.env.NODE_ENV = 'hmr';
-  serve();
+gulp.task('production', () => {
+  process.env.NODE_ENV = 'production';
+
+  webpack();
 });
