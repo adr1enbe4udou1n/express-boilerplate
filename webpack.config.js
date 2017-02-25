@@ -12,9 +12,9 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const production = process.env.NODE_ENV === 'production';
 const hmr = process.env.NODE_ENV === 'hot';
 
-const expressPort = parseInt(process.env.PORT, 10);
-const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
-const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT, 10);
+const expressPort = parseInt(process.env.PORT || '3000', 10);
+const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
+const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10);
 
 module.exports = {
   entry: {

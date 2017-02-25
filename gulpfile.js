@@ -57,8 +57,8 @@ function serve() {
 
   // start webpack dev server
   const compiler = getCompiler();
-  const expressPort = parseInt(process.env.PORT, 10);
-  const devPort = parseInt(process.env.WEBPACKDEVSERVER_PORT, 10);
+  const expressPort = parseInt(process.env.PORT || '3000', 10);
+  const devPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
 
   new webpackDevServer(compiler, {
     historyApiFallback: true,
