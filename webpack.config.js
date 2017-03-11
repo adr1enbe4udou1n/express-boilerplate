@@ -191,4 +191,4 @@ else {
   }
 }
 
-module.exports.plugins = (module.exports.plugins || []).concat(plugins);
+module.exports.plugins.push(...plugins);
