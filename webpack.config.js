@@ -173,7 +173,6 @@ else {
       new StatsWriterPlugin({
         filename: "assets-manifest.json",
         transform: function (data, opts) {
-          console.log(data.assetsByChunkName);
           return JSON.stringify({
             '/js/manifest.js': data.assetsByChunkName.manifest[0],
             '/js/vendor.js': data.assetsByChunkName.vendor[0],
