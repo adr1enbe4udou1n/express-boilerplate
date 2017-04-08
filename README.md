@@ -80,6 +80,7 @@ Current used main loaders and plugins :
 * `postcss-loader` with `autoprefixer`
 * `sass-loader`
 * `vue-loader` for vue components compilations with HMR support
+* `img-loader` for image web optimization (mozjpeg, pngquant,...)
 
 ## License
 
