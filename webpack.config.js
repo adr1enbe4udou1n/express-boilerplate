@@ -59,12 +59,21 @@ module.exports = {
         use: 'babel-loader?cacheDirectory'
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'images/[name].[ext]?[hash]',
-          publicPath: '/'
-        }
+        test: /\.html$/,
+        loaders: ['html-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        loaders: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]?[hash]',
+              publicPath: '/'
+            }
+          },
+          'img-loader'
+        ]
       },
       {
         test: /\.(woff2?|ttf|eot|svg|otf)$/,
