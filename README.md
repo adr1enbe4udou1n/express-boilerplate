@@ -64,7 +64,7 @@ Furthermore, Browsersync server is used for synchronization across multiple devi
 Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. This is very useful for vue components which can be hot reloaded without losing client state.  
 CSS are bundled into the app.js file in order to include CSS hot reload. Browsersync is still used as a superset of Webpack Dev Server. Default Webpack dev port is 5000 and can be customized with WEBPACKDEVSERVER_PORT variable.
 
-* `npm run production`, alias `gulp production`  
+* `npm run prod`, alias `gulp prod`  
 Launch Webpack assets compilation in production mode, including extraction of separated CSS file, minifying and export to dedicated `dist` public folder with chunked hash added to files for cache busting.
 
 * `npm start`  

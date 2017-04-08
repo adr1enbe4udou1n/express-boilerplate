@@ -43,7 +43,7 @@ function serve() {
     server.notify.apply(server, [file]);
   });
 
-  if (process.env.NODE_ENV === 'developement') {
+  if (process.env.NODE_ENV === 'development') {
     // start webpack watcher
     return webpack(true);
   }
@@ -66,14 +66,16 @@ function serve() {
   }).listen(devPort);
 }
 
-gulp.task('dev', () => {
-  process.env.NODE_ENV = 'developement';
+gulp.task('dev', ['development']);
+
+gulp.task('development', () => {
+  process.env.NODE_ENV = 'development';
 
   webpack();
 });
 
 gulp.task('watch', () => {
-  process.env.NODE_ENV = 'developement';
+  process.env.NODE_ENV = 'development';
 
   serve();
 });
@@ -83,6 +85,8 @@ gulp.task('hot', () => {
 
   serve();
 });
+
+gulp.task('prod', ['production']);
 
 gulp.task('production', () => {
   process.env.NODE_ENV = 'production';

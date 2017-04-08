@@ -56,7 +56,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader?cacheDirectory'
+        use: 'babel-loader?cacheDirectory'
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -125,7 +125,7 @@ let plugins = [];
 if (hmr) {
   module.exports.module.rules.push({
     test: /\.scss$/,
-    loader: [
+    use: [
       'style-loader',
       'css-loader',
       'postcss-loader',
@@ -147,9 +147,9 @@ if (hmr) {
 else {
   module.exports.module.rules.push({
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract({
-      fallbackLoader: 'style-loader',
-      loader: [
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: [
         'css-loader',
         'postcss-loader',
         'resolve-url-loader',
