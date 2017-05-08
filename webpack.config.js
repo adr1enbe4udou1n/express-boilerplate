@@ -107,7 +107,7 @@ module.exports = {
       {
         host: browserSyncHost,
         port: browserSyncPort,
-        open: 'external',
+        open: browserSyncHost === 'localhost' ? 'local' : 'external',
         proxy: `http://${browserSyncHost}:${hmr ? webpackDevServerPort : expressPort}/`,
         files: [
           'public/js/**/*.js',

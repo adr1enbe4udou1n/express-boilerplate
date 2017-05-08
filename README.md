@@ -82,6 +82,10 @@ Current used main loaders and plugins :
 * `vue-loader` for vue components compilations with HMR support
 * `img-loader` for image web optimization (mozjpeg, pngquant,...)
 
+### External device sync (mobile, tablet, etc.)
+
+You must explicitly set BROWSERSYNC_HOST variable to a valid external IP in order to support server livereload + HMR for external devices.
+
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://adr1enbe4udou1n.mit-license.org).
