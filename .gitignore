@@ -3,3 +3,5 @@
 /public/css
 /public/js
 .env
+
+*.log

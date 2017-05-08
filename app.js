@@ -10,11 +10,11 @@ const connectLivereload = require('connect-livereload');
 const routes = require('./routes/web');
 
 const app = express();
-app.locals.production = process.env.NODE_ENV === 'production';
+app.locals.development = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'hot';
 app.locals.hmr = process.env.NODE_ENV === 'hot';
 
 // specific dev environnement
-if (!app.locals.production) {
+if (app.locals.development) {
   // livereload for server-side modification
   app.use(connectLivereload());
 }

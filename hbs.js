@@ -28,10 +28,10 @@ module.exports = (app) => {
   hbs.registerHelper('active_route', path => (app.locals.path === path ? 'active' : ''));
 
   hbs.registerHelper('assets', (name) => {
-    if (app.locals.production) {
-      return `/${manifest[`/${name}`]}`;
+    if (app.locals.development) {
+      return `/${name}`;
     }
 
-    return `/${name}`;
+    return `/${manifest[`/${name}`]}`;
   });
 };

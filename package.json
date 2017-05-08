@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development webpack --progress --hide-modules",
+    "watch": "cross-env NODE_ENV=development gulp serve",
+    "hot": "cross-env NODE_ENV=hot gulp serve",
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "cross-env NODE_ENV=production node ./bin/www"
+    "start": "node ./bin/www"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "devDependencies": {
     "autoprefixer": "^7.0.1",
@@ -52,19 +54,6 @@
     "webpack-dev-server": "^2.4.5",
     "webpack-notifier": "^1.5.0",
     "webpack-stats-plugin": "^0.1.5"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true,
-      "browser": true
-    },
-    "rules": {
-      "quotes": [
-        2,
-        "single"
-      ]
-    }
   },
   "dependencies": {
     "body-parser": "^1.17.1",

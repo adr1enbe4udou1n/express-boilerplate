@@ -49,22 +49,22 @@ And of course Webpack configuration file for all assets management, with dev and
 
 ## Development
 
-Though there are pure npm scripts for webpack assets compilations, Gulp is still essential in order to launch Express with livereload support. Install it globally with `npm i -g gulp`.
+NB : Though assets are fully compiled by webpack, Gulp is still used for server-side livereload support.
 
 ### Commands
 
-* `npm run dev`, alias `gulp dev`  
+* `npm run dev`  
 Start Webpack assets compilation in development mode. CSS file is extracted from JS and main vendors as loadash, jquery, vue, etc. are splitted into sperated vendor.js file. This is useful for keep them cached after each application updates for end users.
 
-* `gulp watch`  
+* `npm run watch`  
 Start Express server to development mode with server-side livereload support. Webpack watcher is launched for autoreloading when assets are updated.  
 Furthermore, Browsersync server is used for synchronization across multiple devices and CSS injection support. Default dev port is 7000 and is configurable with environment file by BROWSERSYNC_PORT variable.
 
-* `gulp hot`  
+* `npm run hot`  
 Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. This is very useful for vue components which can be hot reloaded without losing client state.  
 CSS are bundled into the app.js file in order to include CSS hot reload. Browsersync is still used as a superset of Webpack Dev Server. Default Webpack dev port is 5000 and can be customized with WEBPACKDEVSERVER_PORT variable.
 
-* `npm run prod`, alias `gulp prod`  
+* `npm run prod`  
 Launch Webpack assets compilation in production mode, including extraction of separated CSS file, minifying and export to dedicated `dist` public folder with chunked hash added to files for cache busting.
 
 * `npm start`  
