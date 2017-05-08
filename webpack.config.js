@@ -15,6 +15,7 @@ const hmr = process.env.NODE_ENV === 'hot';
 const expressPort = parseInt(process.env.PORT || '3000', 10);
 const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
 const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10);
+const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
 
 module.exports = {
   entry: {
@@ -34,7 +35,7 @@ module.exports = {
   output: {
     path: __dirname + '/public',
     filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
-    publicPath: hmr ? `http://localhost:${webpackDevServerPort}/` : '/'
+    publicPath: hmr ? `http://${browserSyncHost}:${webpackDevServerPort}/` : '/'
   },
   module: {
     rules: [
@@ -103,9 +104,10 @@ module.exports = {
     }),
     new BrowserSyncPlugin(
       {
-        host: process.env.BROWSERSYNC_HOST || 'localhost',
+        host: browserSyncHost,
         port: browserSyncPort,
-        proxy: `http://localhost:${hmr ? webpackDevServerPort : expressPort}`,
+        open: 'external',
+        proxy: `http://${browserSyncHost}:${hmr ? webpackDevServerPort : expressPort}/`,
         files: [
           'public/js/**/*.js',
           'public/css/**/*.css'
@@ -144,7 +146,7 @@ if (hmr) {
   });
 
   module.exports.entry.app.push(
-    `webpack-dev-server/client?http://localhost:${webpackDevServerPort}/`,
+    `webpack-dev-server/client?http://${browserSyncHost}:${webpackDevServerPort}/`,
     'webpack/hot/dev-server'
   );
 

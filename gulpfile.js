@@ -1,3 +1,4 @@
+require('dotenv').config();
 const gulp = require('gulp');
 const gls = require('gulp-live-server');
 const webpackDevServer = require('webpack-dev-server');
@@ -52,6 +53,7 @@ function serve() {
   const compiler = getCompiler();
   const expressPort = parseInt(process.env.PORT || '3000', 10);
   const devPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
+  const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
 
   new webpackDevServer(compiler, {
     historyApiFallback: true,
@@ -62,7 +64,11 @@ function serve() {
     proxy: {
       '/': `http://localhost:${expressPort}`
     },
-    stats: statsOptions
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    stats: statsOptions,
+    public: browserSyncHost
   }).listen(devPort);
 }
 
