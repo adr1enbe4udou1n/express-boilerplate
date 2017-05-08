@@ -1,25 +1,26 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res) => {
   res.render('pages/home', { message: {
     body: 'Yeaaah!',
-    type: 'success'
-  }});
+    type: 'success',
+  } });
 });
 
 /* Contact about page. */
-router.get('/about', function(req, res, next) {
+router.get('/about', (req, res) => {
   res.render('pages/about');
 });
 
 /* Contact contact page. */
-router.get('/contact', function(req, res, next) {
+router.get('/contact', (req, res) => {
   res.render('pages/contact', { message: {
     body: 'Enter a valid email address',
-    type: 'danger'
-  }});
+    type: 'danger',
+  } });
 });
 
 module.exports = router;

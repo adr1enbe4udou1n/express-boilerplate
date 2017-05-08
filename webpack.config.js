@@ -6,8 +6,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const production = process.env.NODE_ENV === 'production';
 const hmr = process.env.NODE_ENV === 'hot';
@@ -33,7 +34,7 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + '/public',
+    path: path.join(__dirname, '/public'),
     filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
     publicPath: hmr ? `http://${browserSyncHost}:${webpackDevServerPort}/` : '/'
   },
@@ -50,7 +51,7 @@ module.exports = {
           },
 
           postcss: [
-            require('autoprefixer')
+            autoprefixer
           ]
         }
       },
@@ -91,7 +92,7 @@ module.exports = {
       minimize: production,
       options: {
         postcss: [
-          require('autoprefixer')
+          autoprefixer
         ],
         context: __dirname,
         output: { path: './' }
@@ -122,7 +123,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.vue'],
 
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      vue$: 'vue/dist/vue.common.js'
     }
   },
   performance: {
@@ -154,8 +155,7 @@ if (hmr) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ];
-}
-else {
+} else {
   module.exports.module.rules.push({
     test: /\.scss$/,
     use: ExtractTextPlugin.extract({
@@ -172,7 +172,7 @@ else {
   if (production) {
     plugins = [
       new CleanWebpackPlugin(['dist'], {
-        root: __dirname + '/public'
+        root: path.join(__dirname, '/public')
       }),
       new ExtractTextPlugin('dist/css/[name].[chunkhash].css'),
       new webpack.optimize.UglifyJsPlugin({
@@ -182,8 +182,8 @@ else {
         }
       }),
       new StatsWriterPlugin({
-        filename: "assets-manifest.json",
-        transform: function (data, opts) {
+        filename: 'assets-manifest.json',
+        transform(data) {
           return JSON.stringify({
             '/js/manifest.js': data.assetsByChunkName.manifest[0],
             '/js/vendor.js': data.assetsByChunkName.vendor[0],
@@ -193,8 +193,7 @@ else {
         }
       })
     ];
-  }
-  else {
+  } else {
     plugins = [
       new ExtractTextPlugin('css/[name].css')
     ];

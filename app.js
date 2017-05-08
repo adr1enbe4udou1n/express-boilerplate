@@ -1,21 +1,22 @@
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
-let hbsInit = require('./hbs');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const hbsInit = require('./hbs');
+const connectLivereload = require('connect-livereload');
 
-let routes = require('./routes/web');
+const routes = require('./routes/web');
 
-let app = express();
+const app = express();
 app.locals.production = process.env.NODE_ENV === 'production';
 app.locals.hmr = process.env.NODE_ENV === 'hot';
 
 // specific dev environnement
 if (!app.locals.production) {
   // livereload for server-side modification
-  app.use(require('connect-livereload')());
+  app.use(connectLivereload());
 }
 
 // view engine setup
@@ -26,11 +27,11 @@ hbsInit(app);
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   app.locals.path = req.path;
   next();
 });
@@ -39,14 +40,14 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  let err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -1,38 +1,37 @@
 const hbs = require('hbs');
+const manifest = require('./public/assets-manifest.json');
 
-module.exports = function (app) {
+module.exports = (app) => {
   hbs.localsAsTemplateData(app.request);
-  hbs.registerPartials(__dirname + '/views/partials');
+  hbs.registerPartials(`${__dirname}/views/partials`);
 
-  let blocks = {};
+  const blocks = {};
 
-  hbs.registerHelper('extend', function (name, context) {
+  hbs.registerHelper('extend', (name, context) => {
     let block = blocks[name];
     if (!block) {
-      block = blocks[name] = [];
+      blocks[name] = [];
+      block = blocks[name];
     }
 
     block.push(context.fn(this));
   });
 
-  hbs.registerHelper('block', function (name) {
-    let val = (blocks[name] || []).join('\n');
+  hbs.registerHelper('block', (name) => {
+    const val = (blocks[name] || []).join('\n');
 
     // clear the block
     blocks[name] = [];
     return val;
   });
 
-  hbs.registerHelper('active_route', function (path) {
-    return app.locals.path === path ? 'active' : '';
-  });
+  hbs.registerHelper('active_route', path => (app.locals.path === path ? 'active' : ''));
 
-  hbs.registerHelper('assets', function (name) {
+  hbs.registerHelper('assets', (name) => {
     if (app.locals.production) {
-      let manifest = require('./public/assets-manifest.json');
-      return '/' + manifest['/' + name];
+      return `/${manifest[`/${name}`]}`;
     }
 
-    return '/' + name;
+    return `/${name}`;
   });
 };
