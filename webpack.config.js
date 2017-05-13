@@ -18,6 +18,13 @@ const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000
 const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10);
 const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
 
+const extractSass = new ExtractTextPlugin({
+  filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
+  disable: hmr
+});
+
+const sassSourceMap = production || (process.env.SASS_SOURCE_MAP || false);
+
 module.exports = {
   entry: {
     app: [
@@ -40,6 +47,27 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [{
+            loader: 'css-loader',
+            options: {
+              sourceMap: sassSourceMap
+            }
+          }, {
+            loader: 'postcss-loader'
+          }, {
+            loader: 'resolve-url-loader'
+          }, {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: sassSourceMap
+            }
+          }],
+          fallback: 'style-loader'
+        })
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -103,6 +131,7 @@ module.exports = {
       names: ['vendor', 'manifest'],
       minChunks: Infinity
     }),
+    extractSass,
     new BrowserSyncPlugin(
       {
         host: browserSyncHost,
@@ -129,23 +158,12 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? '#source-map' : '#inline-source-map'
+  devtool: production ? 'source-map' : 'inline-source-map'
 };
 
 let plugins = [];
 
 if (hmr) {
-  module.exports.module.rules.push({
-    test: /\.scss$/,
-    use: [
-      'style-loader',
-      'css-loader',
-      'postcss-loader',
-      'resolve-url-loader',
-      'sass-loader?sourceMap&precision=8'
-    ]
-  });
-
   module.exports.entry.app.push(
     `webpack-dev-server/client?http://${browserSyncHost}:${webpackDevServerPort}/`,
     'webpack/hot/dev-server'
@@ -155,49 +173,31 @@ if (hmr) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ];
-} else {
-  module.exports.module.rules.push({
-    test: /\.scss$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: [
-        'css-loader',
-        'postcss-loader',
-        'resolve-url-loader',
-        'sass-loader?sourceMap&precision=8'
-      ]
-    })
-  });
+}
 
-  if (production) {
-    plugins = [
-      new CleanWebpackPlugin(['dist'], {
-        root: path.join(__dirname, '/public')
-      }),
-      new ExtractTextPlugin('dist/css/[name].[chunkhash].css'),
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-          warnings: false
-        }
-      }),
-      new StatsWriterPlugin({
-        filename: 'assets-manifest.json',
-        transform(data) {
-          return JSON.stringify({
-            '/js/manifest.js': data.assetsByChunkName.manifest[0],
-            '/js/vendor.js': data.assetsByChunkName.vendor[0],
-            '/js/app.js': data.assetsByChunkName.app[0],
-            '/css/app.css': data.assetsByChunkName.app[1]
-          }, null, 2);
-        }
-      })
-    ];
-  } else {
-    plugins = [
-      new ExtractTextPlugin('css/[name].css')
-    ];
-  }
+if (production) {
+  plugins = [
+    new CleanWebpackPlugin(['dist'], {
+      root: path.join(__dirname, '/public')
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new StatsWriterPlugin({
+      filename: 'assets-manifest.json',
+      transform(data) {
+        return JSON.stringify({
+          '/js/manifest.js': data.assetsByChunkName.manifest[0],
+          '/js/vendor.js': data.assetsByChunkName.vendor[0],
+          '/js/app.js': data.assetsByChunkName.app[0],
+          '/css/app.css': data.assetsByChunkName.app[1]
+        }, null, 2);
+      }
+    })
+  ];
 }
 
 module.exports.plugins.push(...plugins);

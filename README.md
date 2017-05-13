@@ -58,11 +58,11 @@ Start Webpack assets compilation in development mode. CSS file is extracted from
 
 * `npm run watch`  
 Start Express server to development mode with server-side livereload support. Webpack watcher is launched for autoreloading when assets are updated.  
-Furthermore, Browsersync server is used for synchronization across multiple devices and CSS injection support. Default dev port is 7000 and is configurable with environment file by BROWSERSYNC_PORT variable.
+Furthermore, Browsersync server is used for synchronization across multiple devices and CSS injection support. Default dev port is 7000 and is configurable with environment file by `BROWSERSYNC_PORT` variable.
 
 * `npm run hot`  
 Serve Express server through Webpack Dev Server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) support. This is very useful for vue components which can be hot reloaded without losing client state.  
-CSS are bundled into the app.js file in order to include CSS hot reload. Browsersync is still used as a superset of Webpack Dev Server. Default Webpack dev port is 5000 and can be customized with WEBPACKDEVSERVER_PORT variable.
+CSS are bundled into the app.js file in order to include CSS hot reload. Browsersync is still used as a superset of Webpack Dev Server. Default Webpack dev port is 5000 and can be customized with `WEBPACKDEVSERVER_PORT` variable.
 
 * `npm run prod`  
 Launch Webpack assets compilation in production mode, including extraction of separated CSS file, minifying and export to dedicated `dist` public folder with chunked hash added to files for cache busting.
@@ -81,6 +81,8 @@ Current used main loaders and plugins :
 * `sass-loader`
 * `vue-loader` for vue components compilations with HMR support
 * `img-loader` for image web optimization (mozjpeg, pngquant,...)
+
+NB : Source Map for Sass are disabled by default. You can enable it with `SASS_SOURCE_MAP` variable, with disadvantage of 300% slower rebuild time.
 
 ### External device sync (mobile, tablet, etc.)
 
