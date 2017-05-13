@@ -266,17 +266,6 @@ autoprefixer@^6.0.2, autoprefixer@^6.3.1:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-autoprefixer@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-7.0.1.tgz#472d7620a1b286e55ad1d8345a09d76aaed99d92"
-  dependencies:
-    browserslist "^2.1.2"
-    caniuse-lite "^1.0.30000665"
-    normalize-range "^0.1.2"
-    num2fraction "^1.2.2"
-    postcss "^6.0.1"
-    postcss-value-parser "^3.2.3"
-
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -1041,13 +1030,6 @@ browserslist@^1.0.0, browserslist@^1.3.6, browserslist@^1.4.0, browserslist@^1.5
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
 
-browserslist@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.1.2.tgz#a9dd0791342dab019861c2dd1cd0fd5d83230d39"
-  dependencies:
-    caniuse-lite "^1.0.30000665"
-    electron-to-chromium "^1.3.9"
-
 bs-recipes@1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/bs-recipes/-/bs-recipes-1.3.4.tgz#0d2d4d48a718c8c044769fdc4f89592dc8b69585"
@@ -1172,10 +1154,6 @@ caniuse-api@^1.5.2, caniuse-api@^1.5.3:
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30000667"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000667.tgz#fb6060dbf349c101df26f421442419802fc6dab1"
-
-caniuse-lite@^1.0.30000665:
-  version "1.0.30000667"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000667.tgz#dcbf8f19fa3b7ef447e7d514170a9ef949f4e347"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -2086,7 +2064,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.9:
+electron-to-chromium@^1.2.7:
   version "1.3.10"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.10.tgz#63d62b785471f0d8dda85199d64579de8a449f08"
 

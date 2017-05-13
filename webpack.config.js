@@ -8,7 +8,6 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 const production = process.env.NODE_ENV === 'production';
 const hmr = process.env.NODE_ENV === 'hot';
@@ -58,7 +57,7 @@ module.exports = {
           }, {
             loader: 'postcss-loader',
             options: {
-              sourceMap: sassSourceMap
+              sourceMap: true
             }
           }, {
             loader: 'resolve-url-loader'
@@ -79,11 +78,7 @@ module.exports = {
             js: 'babel-loader?cacheDirectory',
             scss: 'vue-style-loader!css-loader!sass-loader',
             sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-          },
-
-          postcss: [
-            autoprefixer
-          ]
+          }
         }
       },
       {
@@ -122,9 +117,6 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       minimize: production,
       options: {
-        postcss: [
-          autoprefixer
-        ],
         context: __dirname,
         output: { path: './' }
       }
