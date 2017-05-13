@@ -56,7 +56,10 @@ module.exports = {
               sourceMap: sassSourceMap
             }
           }, {
-            loader: 'postcss-loader'
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: sassSourceMap
+            }
           }, {
             loader: 'resolve-url-loader'
           }, {
