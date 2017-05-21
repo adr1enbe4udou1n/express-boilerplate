@@ -18,9 +18,9 @@
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-env": "^1.5.0",
     "bootstrap-sass": "^3.3.7",
-    "browser-sync": "^2.18.11",
+    "browser-sync": "^2.18.12",
     "browser-sync-webpack-plugin": "^1.1.4",
     "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^5.0.0",
@@ -37,7 +37,7 @@
     "img-loader": "^2.0.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.5.3",
     "postcss-cssnext": "^2.11.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.5",
@@ -46,9 +46,9 @@
     "slick-carousel": "^1.6.0",
     "style-loader": "^0.17.0",
     "sweetalert2": "^6.6.3",
-    "uglify-js": "^3.0.6",
+    "uglify-js": "^3.0.10",
     "vue": "^2.3.3",
-    "vue-loader": "^12.0.4",
+    "vue-loader": "^12.1.0",
     "vue-template-compiler": "^2.3.3",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5",
@@ -56,16 +56,16 @@
     "webpack-stats-plugin": "^0.1.5"
   },
   "dependencies": {
-    "body-parser": "^1.17.1",
+    "body-parser": "^1.17.2",
     "connect-livereload": "^0.6.0",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.1",
-    "debug": "^2.6.6",
+    "debug": "^2.6.8",
     "dotenv": "^4.0.0",
-    "express": "^4.15.2",
+    "express": "^4.15.3",
     "hbs": "^4.0.1",
     "lodash": "^4.17.4",
     "morgan": "^1.8.1",
-    "serve-favicon": "^2.4.2"
+    "serve-favicon": "^2.4.3"
   }
 }
