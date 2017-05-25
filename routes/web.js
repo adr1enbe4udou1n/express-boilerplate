@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   res.render('pages/home', { message: {
     body: 'Yeaaah!',
-    type: 'success',
+    type: 'success'
   } });
 });
 
@@ -19,7 +19,7 @@ router.get('/about', (req, res) => {
 router.get('/contact', (req, res) => {
   res.render('pages/contact', { message: {
     body: 'Enter a valid email address',
-    type: 'danger',
+    type: 'danger'
   } });
 });
 
