@@ -1,19 +1,31 @@
 require('dotenv').config();
+
 const gulp = require('gulp');
-const gls = require('gulp-live-server');
+const nodemon = require('gulp-nodemon');
+const livereload = require('gulp-livereload');
+
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 
 gulp.task('serve', () => {
-  // start express app
-  const server = gls('bin/www', { env: { NODE_ENV: process.env.NODE_ENV } });
-  server.start();
+  livereload.listen();
 
-  // watcher for livereloading express server and browser
-  gulp.watch(['app.js', 'routes/**/*', 'views/**/*'], (file) => {
-    server.start.bind(server)();
-    server.notify.apply(server, [file]);
+  // start express app
+  nodemon({
+    script: 'bin/www',
+    ext: 'js hbs',
+    ignore: [
+      'assets/',
+      'public/',
+      'node_modules/'
+    ],
+    env: { NODE_ENV: process.env.NODE_ENV }
+  })
+  .on('restart', () => {
+    gulp
+      .src('bin/www')
+      .pipe(livereload());
   });
 
   const compiler = webpack(webpackConfig);
