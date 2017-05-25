@@ -14,7 +14,7 @@ gulp.task('serve', () => {
   // start express app
   nodemon({
     script: 'bin/www',
-    ext: 'js hbs',
+    ext: 'js nunjucks',
     ignore: [
       'assets/',
       'public/',

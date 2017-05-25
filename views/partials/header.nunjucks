@@ -1,0 +1,10 @@
+<div class="header">
+  <div class="container">
+    <ul class="nav nav-pills pull-right">
+      <li class="{% if path === '/' %}active{% endif %}"><a href="/">Home</a></li>
+      <li class="{% if path === '/about' %}active{% endif %}"><a href="/about">About</a></li>
+      <li class="{% if path === '/contact' %}active{% endif %}"><a href="/contact">Contact</a></li>
+    </ul>
+    <h3 class="text-muted">express-boilerplate</h3>
+  </div>
+</div>

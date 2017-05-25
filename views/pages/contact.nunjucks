@@ -1,4 +1,7 @@
-<h4>Contact</h4>
+{% extends 'layout.nunjucks' %}
+
+{% block content %}
+<h1>Contact</h1>
 
 <div class="form-group has-success has-feedback">
   <label class="control-label" for="inputSuccess2">Input with success</label>
@@ -27,3 +30,4 @@
   <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
   <span id="inputGroupSuccess1Status" class="sr-only">(success)</span>
 </div>
+{% endblock %}

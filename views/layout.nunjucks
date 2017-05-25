@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    {% if not hmr %}
+    <link rel="stylesheet" href="{{ css.app }}">
+    {% endif %}
+  </head>
+  <body>
+    <div id="app">
+      {% include "partials/header.nunjucks" %}
+
+      <div class="container">
+        {% block highlight %}{% endblock %}
+        {% include "partials/messages.nunjucks" %}
+        {% block content %}{% endblock %}
+      </div>
+
+      {% include "partials/footer.nunjucks" %}
+    </div>
+
+    <script src="{{ js.manifest }}"></script>
+    <script src="{{ js.vendor }}"></script>
+    <script src="{{ js.app }}"></script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

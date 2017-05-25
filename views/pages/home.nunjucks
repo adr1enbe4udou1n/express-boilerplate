@@ -1,4 +1,6 @@
-{{#extend "highlight"}}
+{% extends 'layout.nunjucks' %}
+
+{% block highlight %}
 <div class="slider">
   <div><h3>1</h3></div>
   <div><h3>2</h3></div>
@@ -7,8 +9,9 @@
   <div><h3>5</h3></div>
   <div><h3>6</h3></div>
 </div>
-{{/extend}}
+{% endblock %}
 
+{% block content %}
 <div class="row marketing">
   <h4>HTML5 Boilerplate</h4>
   <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
@@ -21,3 +24,4 @@
 
   <button class="btn btn-default sweet">Sweet !</button>
 </div>
+{% endblock %}
