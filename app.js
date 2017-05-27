@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -11,28 +12,26 @@ const routes = require('./routes/web');
 const nunjucks = require('nunjucks');
 
 const app = express();
-app.locals.development = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'hot';
-app.locals.hmr = process.env.NODE_ENV === 'hot';
 
-app.locals.css = {
-  app: '/css/app.css'
-};
-app.locals.js = {
-  manifest: '/js/manifest.js',
-  vendor: '/js/vendor.js',
-  app: '/js/app.js'
+const development = process.env.NODE_ENV !== 'production';
+const hmr = process.argv.includes('--hot');
+const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
+
+app.locals.assets = ($path) => {
+  if (development) {
+    if (hmr) {
+      return `//localhost:${webpackDevServerPort}/${$path}`;
+    }
+
+    return `/${$path}`;
+  }
+  return manifest[`/${$path}`];
 };
 
 // specific dev environnement
-if (app.locals.development) {
+if (development) {
   // livereload for server-side modification
   app.use(connectLivereload());
-} else {
-  // Production assets
-  app.locals.css.app = manifest[app.locals.css.app];
-  app.locals.js.manifest = manifest[app.locals.js.manifest];
-  app.locals.js.vendor = manifest[app.locals.js.vendor];
-  app.locals.js.app = manifest[app.locals.js.app];
 }
 
 // view engine setup

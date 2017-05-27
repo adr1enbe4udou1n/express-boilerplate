@@ -10,7 +10,7 @@ const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
-const hmr = process.env.NODE_ENV === 'hot';
+const hmr = process.argv.includes('--hot');
 
 const expressPort = parseInt(process.env.PORT || '3000', 10);
 const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
@@ -42,7 +42,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/public'),
     filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
-    publicPath: hmr ? `http://${browserSyncHost}:${webpackDevServerPort}/` : '/'
+    publicPath: hmr ? `http://localhost:${webpackDevServerPort}/` : '/'
   },
   module: {
     rules: [
@@ -132,7 +132,7 @@ module.exports = {
         host: browserSyncHost,
         port: browserSyncPort,
         open: browserSyncHost === 'localhost' ? 'local' : 'external',
-        proxy: `http://${browserSyncHost}:${hmr ? webpackDevServerPort : expressPort}/`,
+        proxy: `http://${browserSyncHost}:${expressPort}/`,
         files: [
           'public/js/**/*.js',
           'public/css/**/*.css'
@@ -160,7 +160,7 @@ let plugins = [];
 
 if (hmr) {
   module.exports.entry.app.push(
-    `webpack-dev-server/client?http://${browserSyncHost}:${webpackDevServerPort}/`,
+    `webpack-dev-server/client?http://localhost:${webpackDevServerPort}/`,
     'webpack/hot/dev-server'
   );
 
@@ -185,10 +185,10 @@ if (production) {
       filename: 'assets-manifest.json',
       transform(data) {
         return JSON.stringify({
-          '/js/manifest.js': data.assetsByChunkName.manifest[0],
-          '/js/vendor.js': data.assetsByChunkName.vendor[0],
-          '/js/app.js': data.assetsByChunkName.app[0],
-          '/css/app.css': data.assetsByChunkName.app[1]
+          '/js/manifest.js': `/${data.assetsByChunkName.manifest[0]}`,
+          '/js/vendor.js': `/${data.assetsByChunkName.vendor[0]}`,
+          '/js/app.js': `/${data.assetsByChunkName.app[0]}`,
+          '/css/app.css': `/${data.assetsByChunkName.app[1]}`
         }, null, 2);
       }
     })

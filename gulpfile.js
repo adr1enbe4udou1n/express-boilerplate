@@ -9,11 +9,14 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 
 gulp.task('serve', () => {
+  const hmr = process.argv.includes('--hot');
+
   livereload.listen();
 
   // start express app
   nodemon({
     script: 'bin/www',
+    args: hmr ? ['--hot'] : [],
     ext: 'js nunjucks',
     ignore: [
       'assets/',
@@ -22,11 +25,11 @@ gulp.task('serve', () => {
     ],
     env: { NODE_ENV: process.env.NODE_ENV }
   })
-  .on('restart', () => {
-    gulp
-      .src('bin/www')
-      .pipe(livereload());
-  });
+    .on('restart', () => {
+      gulp
+        .src('bin/www')
+        .pipe(livereload());
+    });
 
   const compiler = webpack(webpackConfig);
   const statsOptions = {
@@ -38,33 +41,27 @@ gulp.task('serve', () => {
     modules: false
   };
 
-  if (process.env.NODE_ENV === 'development') {
-    // start webpack watcher
-    compiler.watch({}, (err, stats) => {
-      console.log(stats.toString(statsOptions));
-    });
+  if (hmr) {
+    // start webpack dev server
+    const devPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
+
+    new WebpackDevServer(compiler, {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      historyApiFallback: true,
+      noInfo: true,
+      compress: true,
+      quiet: true,
+      hot: true,
+      stats: statsOptions
+    }).listen(devPort);
 
     return;
   }
 
-  // start webpack dev server
-  const expressPort = parseInt(process.env.PORT || '3000', 10);
-  const devPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
-  const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
-
-  new WebpackDevServer(compiler, {
-    historyApiFallback: true,
-    noInfo: false,
-    compress: true,
-    hot: true,
-    publicPath: compiler.options.output.publicPath,
-    proxy: {
-      '/': `http://localhost:${expressPort}`
-    },
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    },
-    stats: statsOptions,
-    public: browserSyncHost
-  }).listen(devPort);
+  // start webpack watcher
+  compiler.watch({}, (err, stats) => {
+    console.log(stats.toString(statsOptions));
+  });
 });
