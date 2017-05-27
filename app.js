@@ -17,6 +17,8 @@ const development = process.env.NODE_ENV !== 'production';
 const hmr = process.argv.includes('--hot');
 const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
 
+app.locals.hmr = hmr;
+
 app.locals.assets = ($path) => {
   if (development) {
     if (hmr) {
