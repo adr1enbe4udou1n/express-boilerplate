@@ -125,6 +125,11 @@ module.exports = {
       minChunks: Infinity
     }),
     extractSass,
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new BrowserSyncPlugin(
       {
         host: browserSyncHost,
@@ -142,8 +147,6 @@ module.exports = {
     )
   ],
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.vue'],
-
     alias: {
       vue$: 'vue/dist/vue.common.js'
     }
