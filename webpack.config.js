@@ -56,12 +56,7 @@ module.exports = {
               sourceMap: sassSourceMap
             }
           }, {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'resolve-url-loader'
+            loader: `resolve-url-loader${sassSourceMap ? '?sourceMap' : ''}`
           }, {
             loader: 'sass-loader',
             options: {
@@ -156,7 +151,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? 'cheap-source-map' : 'cheap-module-eval-source-map'
+  devtool: production ? 'source-map' : 'inline-source-map'
 };
 
 let plugins = [];
