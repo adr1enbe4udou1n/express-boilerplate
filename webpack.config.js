@@ -19,6 +19,7 @@ const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
 
 const extractSass = new ExtractTextPlugin({
   filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
+  allChunks: true,
   disable: hmr
 });
 
@@ -64,6 +65,8 @@ module.exports = {
           }, {
             loader: 'sass-loader',
             options: {
+              precision: 8,
+              outputStyle: 'expanded',
               sourceMap: sassSourceMap
             }
           }],
@@ -153,7 +156,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? 'source-map' : 'inline-source-map'
+  devtool: production ? 'cheap-source-map' : 'cheap-module-eval-source-map'
 };
 
 let plugins = [];
@@ -166,7 +169,8 @@ if (hmr) {
 
   plugins = [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin()
   ];
 }
 
