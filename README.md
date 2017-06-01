@@ -1,6 +1,6 @@
 # Express Boilerplate
 
-> Frontend boilerplate based on Bootstrap for pure showcase/prototype sites. It's based on Express for server routing, Handlebars as template engine with support of `extend` and `block` helpers for flexible layout design, and finally Webpack 2 for assets management.
+> Frontend boilerplate based on Bootstrap for pure showcase/prototype sites. It's based on Express for server routing, Nunjucks as template engine with support of `extend` and `block` helpers for flexible layout design, and finally Webpack 2 for assets management.
 
 ## Frontend sample features
 
@@ -33,13 +33,13 @@ Public web root directory. Assets are outputted inside this directory.
 Express routes with basic actions callbacks, it's up to you if you prefer dedicated controllers classes outside.
 
 * `views`  
-Handlebars views for HTML layout, with support of `partials`, `extend` and `block` theming.
+Nunjucks views for HTML layout, with support of `partials`, `extend` and `block` theming.
 
 * `app.js`  
 Express app initialization (routes, middlewares, etc.).
 
 * `hbs.js`  
-Handlerbars settings with his helpers (extend, block, active_route, etc.), feel free to add any custom helpers.
+Nunjucks settings with his helpers (extend, block, active_route, etc.), feel free to add any custom helpers.
 
 * `gulpfile.js`  
 Traditional Gulpfile for specific development tasks as launch webpack and serve express dev mode. Assets are entirely managed by Webpack.
