@@ -7,9 +7,15 @@ require('slick-carousel');
 window.swal = require('sweetalert2');
 
 /**
+ * Vue loading
+ */
+import Vue from 'vue';
+import Panel from './components/Panel.vue';
+
+/**
  * Example Vue component
  */
-Vue.component('about', require('./components/Panel.vue'));
+Vue.component('about', Panel);
 
 const app = new Vue({
   el: '#app'

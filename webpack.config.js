@@ -143,7 +143,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.common.js'
+      vue$: 'vue/dist/vue.esm.js'
     }
   },
   performance: {
@@ -169,6 +169,9 @@ if (hmr) {
 
 if (production) {
   plugins = [
+    new webpack.ProvidePlugin({
+      jquery: ['$', 'window.jQuery']
+    }),
     new CleanWebpackPlugin(['dist'], {
       root: path.join(__dirname, '/public')
     }),
