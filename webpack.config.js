@@ -17,12 +17,6 @@ const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000
 const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10);
 const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
 
-const extractSass = new ExtractTextPlugin({
-  filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
-  allChunks: true,
-  disable: hmr
-});
-
 const sassSourceMap = production || (process.env.SASS_SOURCE_MAP || false);
 
 module.exports = {
@@ -49,7 +43,7 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: extractSass.extract({
+        use: ExtractTextPlugin.extract({
           use: [{
             loader: 'css-loader',
             options: {
@@ -124,7 +118,11 @@ module.exports = {
       names: ['vendor', 'manifest'],
       minChunks: Infinity
     }),
-    extractSass,
+    new ExtractTextPlugin({
+      filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
+      allChunks: true,
+      disable: hmr
+    }),
     new BrowserSyncPlugin(
       {
         host: browserSyncHost,
