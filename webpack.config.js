@@ -81,8 +81,11 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        use: 'babel-loader?cacheDirectory'
+        exclude: /node_modules/,
+        use: [
+          'babel-loader?cacheDirectory',
+          'eslint-loader'
+        ]
       },
       {
         test: /\.html$/,
