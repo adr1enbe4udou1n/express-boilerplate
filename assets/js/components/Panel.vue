@@ -12,7 +12,7 @@
   export default {
     props: ['title'],
     mounted() {
-      console.log('Panel Component mounted.')
+      console.log('Panel Component mounted.');
     }
   }
 </script>

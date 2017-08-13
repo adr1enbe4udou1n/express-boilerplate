@@ -17,7 +17,7 @@ import Panel from './components/Panel.vue';
  */
 Vue.component('about', Panel);
 
-const app = new Vue({
+new Vue({
   el: '#app'
 });
 
@@ -30,7 +30,7 @@ $('.slider').slick({
 });
 
 $('button.sweet').click(function() {
-  swal({
+  window.swal({
     title: 'Yo!',
     text: 'Yeaaah!',
     type: 'success',

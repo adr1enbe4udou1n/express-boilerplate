@@ -4,7 +4,8 @@ window._ = require('lodash');
  * jQuery and Bootstrap loading
  */
 window.$ = window.jQuery = require('jquery');
-window.Popper = require('popper.js');
+import Popper from 'popper.js';
+window.Popper = Popper;
 require('bootstrap');
 
 /**
