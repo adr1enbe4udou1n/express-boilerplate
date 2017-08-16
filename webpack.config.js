@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
+const ManifestPlugin = require('webpack-manifest-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
@@ -189,17 +189,7 @@ if (production) {
         warnings: false
       }
     }),
-    new StatsWriterPlugin({
-      filename: 'assets-manifest.json',
-      transform(data) {
-        return JSON.stringify({
-          '/js/manifest.js': `/${data.assetsByChunkName.manifest[0]}`,
-          '/js/vendor.js': `/${data.assetsByChunkName.vendor[0]}`,
-          '/js/app.js': `/${data.assetsByChunkName.app[0]}`,
-          '/css/app.css': `/${data.assetsByChunkName.app[1]}`
-        }, null, 2);
-      }
-    })
+    new ManifestPlugin()
   ];
 }
 

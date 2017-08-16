@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const connectLivereload = require('connect-livereload');
 
-const manifest = require('./public/assets-manifest.json');
+const manifest = require('./public/manifest.json');
 const routes = require('./routes/web');
 const nunjucks = require('nunjucks');
 
@@ -19,15 +19,17 @@ const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000
 
 app.locals.hmr = hmr;
 
-app.locals.assets = ($path) => {
+app.locals.assets = (path) => {
   if (development) {
     if (hmr) {
-      return `//localhost:${webpackDevServerPort}/${$path}`;
+      return `//localhost:${webpackDevServerPort}/${path}`;
     }
 
-    return `/${$path}`;
+    return `/${path}`;
   }
-  return manifest[`/${$path}`];
+
+  let basename = path.split('/').reverse()[0];
+  return `/${manifest[basename]}`;
 };
 
 // specific dev environnement
