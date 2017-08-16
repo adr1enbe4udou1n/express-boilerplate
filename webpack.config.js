@@ -138,14 +138,7 @@ module.exports = {
         host: browserSyncHost,
         port: browserSyncPort,
         open: browserSyncHost === 'localhost' ? 'local' : 'external',
-        proxy: {
-          target: `http://${browserSyncHost}:${expressPort}/`,
-          reqHeaders: function(config) {
-            return {
-              host: `${config.url.hostname}:${browserSyncPort}`,
-            };
-          },
-        },
+        proxy: `http://localhost:${expressPort}/`,
         files: [
           'public/js/**/*.js',
           'public/css/**/*.css'
