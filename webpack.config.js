@@ -152,7 +152,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? 'source-map' : 'inline-source-map'
+  devtool: production ? 'source-map' : 'cheap-module-eval-source-map'
 };
 
 let plugins = [];
