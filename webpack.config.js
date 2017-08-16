@@ -138,7 +138,14 @@ module.exports = {
         host: browserSyncHost,
         port: browserSyncPort,
         open: browserSyncHost === 'localhost' ? 'local' : 'external',
-        proxy: `http://${browserSyncHost}:${expressPort}/`,
+        proxy: {
+          target: `http://${browserSyncHost}:${expressPort}/`,
+          reqHeaders: function(config) {
+            return {
+              host: `${config.url.hostname}:${browserSyncPort}`,
+            };
+          },
+        },
         files: [
           'public/js/**/*.js',
           'public/css/**/*.css'
@@ -157,20 +164,24 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? 'source-map' : 'cheap-module-eval-source-map'
+  devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    contentBase: path.resolve('public'),
+    historyApiFallback: true,
+    noInfo: true,
+    compress: true,
+    quiet: true,
+    port: webpackDevServerPort,
+  },
 };
 
 let plugins = [];
 
 if (hmr) {
-  module.exports.entry.app.push(
-    `webpack-dev-server/client?http://localhost:${webpackDevServerPort}/`,
-    'webpack/hot/dev-server'
-  );
-
   plugins = [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin()
   ];
 }

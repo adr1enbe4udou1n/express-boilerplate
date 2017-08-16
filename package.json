@@ -5,8 +5,12 @@
   "scripts": {
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development webpack --progress --hide-modules",
-    "watch": "cross-env NODE_ENV=development gulp serve",
-    "hot": "cross-env NODE_ENV=development gulp serve --hot",
+    "watch": "npm-run-all --parallel watch:build watch:serve",
+    "watch:build": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
+    "watch:serve": "cross-env NODE_ENV=development gulp serve",
+    "hot": "npm-run-all --parallel hot:build hot:serve",
+    "hot:build": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+    "hot:serve": "cross-env NODE_ENV=development gulp serve --hot",
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "node ./bin/www"
@@ -43,6 +47,7 @@
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.3",
+    "npm-run-all": "^4.0.2",
     "popper.js": "^1.12.2",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
