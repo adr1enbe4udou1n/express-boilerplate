@@ -1,23 +1,23 @@
-require('dotenv').config();
-const path = require('path');
-const webpack = require('webpack');
+require('dotenv').config()
+const path = require('path')
+const webpack = require('webpack')
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const WebpackNotifierPlugin = require('webpack-notifier')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
-const production = process.env.NODE_ENV === 'production';
-const hmr = process.argv.includes('--hot');
+const production = process.env.NODE_ENV === 'production'
+const hmr = process.argv.includes('--hot')
 
-const expressPort = parseInt(process.env.PORT || '3000', 10);
-const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10);
-const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10);
-const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost';
+const expressPort = parseInt(process.env.PORT || '3000', 10)
+const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10)
+const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10)
+const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost'
 
-const sassSourceMap = production || (process.env.SASS_SOURCE_MAP || false);
+const sassSourceMap = production || (process.env.SASS_SOURCE_MAP || false)
 
 module.exports = {
   entry: {
@@ -26,8 +26,9 @@ module.exports = {
       './assets/sass/app.scss'
     ],
     vendor: [
-      'lodash',
       'jquery',
+      'popper.js',
+      'bootstrap',
       'vue',
       'axios',
       'sweetalert2',
@@ -98,9 +99,9 @@ module.exports = {
           {
             loader: 'img-loader',
             options: {
-              enabled: production,
-            },
-          },
+              enabled: production
+            }
+          }
         ]
       },
       {
@@ -113,6 +114,12 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: ['popper.js', 'default']
+    }),
     new FriendlyErrorsWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: production,
@@ -158,30 +165,27 @@ module.exports = {
   devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
   devServer: {
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': '*'
     },
     contentBase: path.resolve('public'),
     historyApiFallback: true,
     noInfo: true,
     compress: true,
     quiet: true,
-    port: webpackDevServerPort,
-  },
-};
+    port: webpackDevServerPort
+  }
+}
 
-let plugins = [];
+let plugins = []
 
 if (hmr) {
   plugins = [
     new webpack.NamedModulesPlugin()
-  ];
+  ]
 }
 
 if (production) {
   plugins = [
-    new webpack.ProvidePlugin({
-      jquery: ['$', 'window.jQuery']
-    }),
     new CleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, 'public')
     }),
@@ -197,7 +201,7 @@ if (production) {
       }
     }),
     new ManifestPlugin()
-  ];
+  ]
 }
 
-module.exports.plugins.push(...plugins);
+module.exports.plugins.push(...plugins)

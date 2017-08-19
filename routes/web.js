@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -10,15 +10,15 @@ router.get('/', (req, res) => {
       type: 'success'
     },
     title: 'Homepage'
-  });
-});
+  })
+})
 
 /* Contact about page. */
 router.get('/about', (req, res) => {
   res.render('pages/about', {
     title: 'About'
-  });
-});
+  })
+})
 
 /* Contact contact page. */
 router.get('/contact', (req, res) => {
@@ -28,7 +28,7 @@ router.get('/contact', (req, res) => {
       type: 'danger'
     },
     title: 'Contact'
-  });
-});
+  })
+})
 
-module.exports = router;
+module.exports = router

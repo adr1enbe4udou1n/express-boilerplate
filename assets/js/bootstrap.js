@@ -1,14 +1,10 @@
-window._ = require('lodash');
-
 /**
  * jQuery and Bootstrap loading
  */
-window.$ = window.jQuery = require('jquery');
-import Popper from 'popper.js';
-window.Popper = Popper;
-require('bootstrap');
+import 'bootstrap'
 
 /**
  * Axios loading
  */
-window.axios = require('axios');
+import axios from 'axios'
+window.axios = axios

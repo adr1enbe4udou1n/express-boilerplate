@@ -1,13 +1,13 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const gulp = require('gulp');
-const nodemon = require('gulp-nodemon');
-const livereload = require('gulp-livereload');
+const gulp = require('gulp')
+const nodemon = require('gulp-nodemon')
+const livereload = require('gulp-livereload')
 
 gulp.task('serve', () => {
-  const hmr = process.argv.includes('--hot');
+  const hmr = process.argv.includes('--hot')
 
-  livereload.listen();
+  livereload.listen()
 
   // start express app
   nodemon({
@@ -24,6 +24,6 @@ gulp.task('serve', () => {
     .on('restart', () => {
       gulp
         .src('bin/www')
-        .pipe(livereload());
-    });
-});
+        .pipe(livereload())
+    })
+})
