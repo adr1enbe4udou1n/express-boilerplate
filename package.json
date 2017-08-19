@@ -21,6 +21,7 @@
   "author": "Adrien Beaudouin",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^7.1.2",
     "axios": "^0.16.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -52,6 +53,7 @@
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.2",
     "popper.js": "^1.12.3",
+    "postcss-loader": "^2.0.6",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "slick-carousel": "^1.7.1",

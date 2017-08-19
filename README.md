@@ -81,8 +81,6 @@ Current used main loaders and plugins :
 * `vue-loader` for vue components compilations with HMR support
 * `img-loader` for image web optimization (mozjpeg, pngquant,...)
 
-NB : Source Map for Sass are disabled by default. You can enable it with `SASS_SOURCE_MAP` variable, with disadvantage of 300% slower rebuild time.
-
 ### External device sync (mobile, tablet, etc.)
 
 You must explicitly set BROWSERSYNC_HOST variable to a valid external IP in order to support server livereload + HMR for external devices.

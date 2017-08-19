@@ -17,8 +17,6 @@ const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000
 const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10)
 const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost'
 
-const sassSourceMap = production || (process.env.SASS_SOURCE_MAP || false)
-
 module.exports = {
   entry: {
     app: [
@@ -49,16 +47,25 @@ module.exports = {
           use: [{
             loader: 'css-loader',
             options: {
-              sourceMap: sassSourceMap
+              sourceMap: true,
+              importLoaders: 1
             }
           }, {
-            loader: `resolve-url-loader${sassSourceMap ? '?sourceMap' : ''}`
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              plugins: [
+                require('autoprefixer')
+              ]
+            }
+          }, {
+            loader: 'resolve-url-loader?sourceMap'
           }, {
             loader: 'sass-loader',
             options: {
               precision: 8,
               outputStyle: 'expanded',
-              sourceMap: sassSourceMap
+              sourceMap: true
             }
           }]
         })
