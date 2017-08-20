@@ -89,13 +89,11 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader?cacheDirectory'
-        ]
+        loader: 'babel-loader?cacheDirectory'
       },
       {
         test: /\.html$/,
-        loaders: ['html-loader']
+        loader: 'html-loader'
       },
       {
         test: /\.(png|jpe?g|gif)$/,
