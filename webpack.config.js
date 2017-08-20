@@ -71,6 +71,11 @@ module.exports = {
         })
       },
       {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre'
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -85,8 +90,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader?cacheDirectory',
-          'eslint-loader'
+          'babel-loader?cacheDirectory'
         ]
       },
       {

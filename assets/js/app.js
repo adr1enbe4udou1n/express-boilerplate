@@ -34,4 +34,4 @@ new Vue().$mount('#app');
       confirmButtonText: 'Cool'
     })
   })
-})(jQuery)
+})(window.jQuery)
