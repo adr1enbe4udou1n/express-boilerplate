@@ -22,15 +22,6 @@ module.exports = {
     app: [
       './assets/js/app.js',
       './assets/sass/app.scss'
-    ],
-    vendor: [
-      'jquery',
-      'popper.js',
-      'bootstrap',
-      'vue',
-      'axios',
-      'sweetalert2',
-      'slick-carousel'
     ]
   },
   output: {
@@ -139,8 +130,20 @@ module.exports = {
     }),
     new WebpackNotifierPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
-      minChunks: Infinity
+      name: 'vendor',
+      minChunks: function (module, count) {
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, './node_modules')
+          ) === 0
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor']
     }),
     new ExtractTextPlugin({
       filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
