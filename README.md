@@ -8,13 +8,13 @@
 * Bootstrap 4 beta
 * Slick Carrousel
 * Sweet Alert 2
-* Vue.js components
+* Vue.js
 
 ## Quick start
 
 ```shell
 yarn
-npm start
+yarn start
 ```
 
 Just as easy !
@@ -37,9 +37,6 @@ Nunjucks views for HTML layout, with support of `partials`, `extend` and `block`
 
 * `app.js`
 Express app initialization (routes, middlewares, etc.).
-
-* `hbs.js`
-Nunjucks settings with his helpers (extend, block, active_route, etc.), feel free to add any custom helpers.
 
 * `gulpfile.js`
 Traditional Gulpfile for specific development tasks as launch webpack and serve express dev mode. Assets are entirely managed by Webpack.
