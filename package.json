@@ -79,5 +79,9 @@
     "morgan": "^1.8.2",
     "nunjucks": "^3.0.1",
     "serve-favicon": "^2.4.3"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
