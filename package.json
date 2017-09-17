@@ -12,7 +12,7 @@
     "hot:build": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
     "hot:serve": "cross-env NODE_ENV=development gulp serve --hot",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "production": "rimraf public/dist && cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "node ./bin/www"
   },
   "engines": {
@@ -30,7 +30,6 @@
     "bootstrap": "4.0.0-beta",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",
-    "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "eslint": "^4.7.0",
@@ -56,6 +55,7 @@
     "popper.js": "^1.12.5",
     "postcss-loader": "^2.0.6",
     "resolve-url-loader": "^2.1.0",
+    "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "slick-carousel": "^1.7.1",
     "style-loader": "^0.18.2",
