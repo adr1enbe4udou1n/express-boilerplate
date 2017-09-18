@@ -1,8 +1,8 @@
 {
   "app.css": "dist/css/app.71d70da30abff38dba7973898882cebd.css",
   "app.css.map": "dist/css/app.71d70da30abff38dba7973898882cebd.css.map",
-  "app.js": "dist/js/app.e4136d1e9db06aec856d.js",
-  "app.js.map": "dist/js/app.e4136d1e9db06aec856d.js.map",
+  "app.js": "dist/js/app.bf2f9cc9ceea196f4100.js",
+  "app.js.map": "dist/js/app.bf2f9cc9ceea196f4100.js.map",
   "fonts\\fontawesome-webfont.eot": "fonts/fontawesome-webfont.eot?674f50d287a8c48dc19ba404d20fe713",
   "fonts\\fontawesome-webfont.svg?v=4.7.0": "fonts/fontawesome-webfont.svg?912ec66d7572ff821749319396470bde",
   "fonts\\fontawesome-webfont.ttf?v=4.7.0": "fonts/fontawesome-webfont.ttf?b06871f281fee6b241d60582ae9369b9",
@@ -13,8 +13,8 @@
   "fonts\\slick.ttf": "fonts/slick.ttf?d41f55a78e6f49a5512878df1737e58a",
   "fonts\\slick.woff": "fonts/slick.woff?b7c9e1e479de3b53f1e4e30ebac2403a",
   "images\\ajax-loader.gif": "images/ajax-loader.gif?68b0c4fcb84d239f261c1a5e65818142",
-  "manifest.js": "dist/js/manifest.d7e43bf65a62b382687d.js",
-  "manifest.js.map": "dist/js/manifest.d7e43bf65a62b382687d.js.map",
+  "manifest.js": "dist/js/manifest.2fb476d3282c1a5c1938.js",
+  "manifest.js.map": "dist/js/manifest.2fb476d3282c1a5c1938.js.map",
   "vendor.js": "dist/js/vendor.0bd4249c5cbd21f6b2a6.js",
   "vendor.js.map": "dist/js/vendor.0bd4249c5cbd21f6b2a6.js.map"
 }

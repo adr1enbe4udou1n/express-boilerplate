@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
@@ -119,7 +119,6 @@ module.exports = {
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default']
     }),
-    new FriendlyErrorsWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: production,
       options: {
@@ -127,6 +126,7 @@ module.exports = {
         output: { path: './' }
       }
     }),
+    new FriendlyErrorsPlugin(),
     new WebpackNotifierPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -208,6 +208,7 @@ if (production) {
         warnings: false
       }
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new ManifestPlugin()
   ]
 }
