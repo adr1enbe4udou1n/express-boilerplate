@@ -32,7 +32,7 @@
     "browser-sync-webpack-plugin": "^1.2.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
-    "eslint": "^4.7.1",
+    "eslint": "^4.7.2",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.2.2",
@@ -59,7 +59,7 @@
     "sass-loader": "^6.0.6",
     "slick-carousel": "^1.7.1",
     "style-loader": "^0.18.2",
-    "sweetalert2": "^6.9.0",
+    "sweetalert2": "^6.9.1",
     "uglify-js": "^3.1.1",
     "vue": "^2.4.4",
     "vue-loader": "^13.0.5",
@@ -70,7 +70,7 @@
     "webpack-notifier": "^1.5.0"
   },
   "dependencies": {
-    "body-parser": "^1.18.1",
+    "body-parser": "^1.18.2",
     "connect-livereload": "^0.6.0",
     "cookie-parser": "^1.4.3",
     "debug": "^3.0.1",
