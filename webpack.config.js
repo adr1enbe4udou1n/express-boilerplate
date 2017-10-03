@@ -147,7 +147,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
       allChunks: true,
-      disable: hmr
+      disable: !production
     }),
     new BrowserSyncPlugin(
       {

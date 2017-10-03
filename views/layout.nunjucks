@@ -7,7 +7,7 @@
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    {% if not hmr %}
+    {% if not development %}
     <link rel="stylesheet" href="{{ assets('css/app.css') }}">
     {% endif %}
   </head>
