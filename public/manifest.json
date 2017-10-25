@@ -1,8 +1,8 @@
 {
-  "app.css": "dist/css/app.8e2c1cbc6333728fc15b98f3df31d054.css",
-  "app.css.map": "dist/css/app.8e2c1cbc6333728fc15b98f3df31d054.css.map",
-  "app.js": "dist/js/app.87ce242f2c5c608027ff.js",
-  "app.js.map": "dist/js/app.87ce242f2c5c608027ff.js.map",
+  "app.css": "dist/css/app.b7c154e4ace6efe331b16820c129a57d.css",
+  "app.css.map": "dist/css/app.b7c154e4ace6efe331b16820c129a57d.css.map",
+  "app.js": "dist/js/app.8c5251e44e05808c10bb.js",
+  "app.js.map": "dist/js/app.8c5251e44e05808c10bb.js.map",
   "fonts\\fontawesome-webfont.eot": "fonts/fontawesome-webfont.eot?674f50d287a8c48dc19ba404d20fe713",
   "fonts\\fontawesome-webfont.svg?v=4.7.0": "fonts/fontawesome-webfont.svg?912ec66d7572ff821749319396470bde",
   "fonts\\fontawesome-webfont.ttf?v=4.7.0": "fonts/fontawesome-webfont.ttf?b06871f281fee6b241d60582ae9369b9",
@@ -13,8 +13,8 @@
   "fonts\\slick.ttf": "fonts/slick.ttf?d41f55a78e6f49a5512878df1737e58a",
   "fonts\\slick.woff": "fonts/slick.woff?b7c9e1e479de3b53f1e4e30ebac2403a",
   "images\\ajax-loader.gif": "images/ajax-loader.gif?68b0c4fcb84d239f261c1a5e65818142",
-  "manifest.js": "dist/js/manifest.b4ba9bbc3f9fb76b7f0b.js",
-  "manifest.js.map": "dist/js/manifest.b4ba9bbc3f9fb76b7f0b.js.map",
-  "vendor.js": "dist/js/vendor.99585ab2d4fb9d289eac.js",
-  "vendor.js.map": "dist/js/vendor.99585ab2d4fb9d289eac.js.map"
+  "manifest.js": "dist/js/manifest.a728a6c18ae33672461b.js",
+  "manifest.js.map": "dist/js/manifest.a728a6c18ae33672461b.js.map",
+  "vendor.js": "dist/js/vendor.fc6181219a1dc90b1691.js",
+  "vendor.js.map": "dist/js/vendor.fc6181219a1dc90b1691.js.map"
 }
