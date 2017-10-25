@@ -6,7 +6,7 @@ import './bootstrap'
 import 'slick-carousel'
 import sweetalert2 from 'sweetalert2'
 import Vue from 'vue'
-import Panel from './components/Panel.vue'
+import Panel from './components/Panel'
 
 window.swal = sweetalert2
 

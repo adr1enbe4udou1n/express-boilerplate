@@ -43,6 +43,7 @@ module.exports = {
           }, {
             loader: 'postcss-loader',
             options: {
+              ident: 'postcss',
               sourceMap: true,
               plugins: [
                 require('autoprefixer')
@@ -147,7 +148,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
       allChunks: true,
-      disable: !production
+      disable: hmr
     }),
     new BrowserSyncPlugin(
       {
@@ -166,6 +167,7 @@ module.exports = {
     )
   ],
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js'
     }
