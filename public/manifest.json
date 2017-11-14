@@ -13,8 +13,8 @@
   "fonts\\slick.ttf": "fonts/slick.ttf?d41f55a78e6f49a5512878df1737e58a",
   "fonts\\slick.woff": "fonts/slick.woff?b7c9e1e479de3b53f1e4e30ebac2403a",
   "images\\ajax-loader.gif": "images/ajax-loader.gif?68b0c4fcb84d239f261c1a5e65818142",
-  "manifest.js": "dist/js/manifest.40157a38edf66060f343.js",
-  "manifest.js.map": "dist/js/manifest.40157a38edf66060f343.js.map",
-  "vendor.js": "dist/js/vendor.39fd5299d97c920010fc.js",
-  "vendor.js.map": "dist/js/vendor.39fd5299d97c920010fc.js.map"
+  "manifest.js": "dist/js/manifest.3334efefcdf15f783560.js",
+  "manifest.js.map": "dist/js/manifest.3334efefcdf15f783560.js.map",
+  "vendor.js": "dist/js/vendor.d654d878023da13c1b00.js",
+  "vendor.js.map": "dist/js/vendor.d654d878023da13c1b00.js.map"
 }
