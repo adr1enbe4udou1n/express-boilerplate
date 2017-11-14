@@ -1,6 +1,6 @@
 # Express Boilerplate
 
-> Frontend boilerplate based on Bootstrap 4 (beta) for pure showcase/prototype sites. It's based on Express for server routing, Nunjucks as template engine with support of `extend` and `block` helpers for flexible layout design, and finally Webpack for assets management.
+> Frontend boilerplate based on Bootstrap 4 (beta), Express for server routing, Nunjucks as server template engine, and finally Webpack for assets management.
 
 ## Frontend features
 

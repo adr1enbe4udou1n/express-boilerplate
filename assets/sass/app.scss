@@ -1,24 +1,24 @@
 // Variables
 @import "variables";
 
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "node_modules/font-awesome/scss/font-awesome";
-@import "node_modules/sweetalert2/src/sweetalert2";
-@import "node_modules/slick-carousel/slick/slick.scss";
-@import "node_modules/slick-carousel/slick/slick-theme.scss";
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/scss/font-awesome";
+@import "~bootstrap-vue/dist/bootstrap-vue.css";
 
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
+// Plugins
+@import "~sweetalert2/src/sweetalert2";
+@import "~slick-carousel/slick/slick.scss";
+@import "~slick-carousel/slick/slick-theme.scss";
 
 /* Space out content a bit */
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+[v-cloak] {
+  display: none;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */

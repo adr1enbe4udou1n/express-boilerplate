@@ -6,18 +6,25 @@ import './bootstrap'
 import 'slick-carousel'
 import sweetalert2 from 'sweetalert2'
 import Vue from 'vue'
-import Panel from './components/Panel'
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
 window.swal = sweetalert2
 
-/**
- * Example Vue component
- */
-Vue.component('about', Panel)
+Vue.use(BootstrapVue)
 
 new Vue().$mount('#app');
 
 (function ($) {
+  /**
+   * Bind all bootstrap tooltips
+   */
+  $('[data-toggle="tooltip"]').tooltip()
+
+  /**
+   * Bind all bootstrap popovers
+   */
+  $('[data-toggle="popover"]').popover()
+
   $('.slider').not('.slick-initialized').removeAttr('hidden').slick({
     dots: true,
     infinite: true,
