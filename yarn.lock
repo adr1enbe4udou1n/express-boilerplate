@@ -6033,6 +6033,10 @@ popper.js@^1.12.6:
   version "1.12.8"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.8.tgz#b59b57473621feaf03726e1abe7c17c4b23c8564"
 
+popper.js@^1.12.9:
+  version "1.12.9"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -7639,9 +7643,9 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-sweetalert2@^6.11.5:
-  version "6.11.5"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.11.5.tgz#a1ede34089225eb864898f4b613db4fec5dbe334"
+sweetalert2@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.0.0.tgz#6e4214a72c3fd6cdbdc94b0b7bed61055a1af50f"
 
 table@^4.0.1:
   version "4.0.1"

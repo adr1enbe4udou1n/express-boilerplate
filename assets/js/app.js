@@ -1,14 +1,22 @@
-import './bootstrap'
+/**
+ * jQuery and Bootstrap loading
+ */
+import 'bootstrap'
+
+/**
+ * Axios loading
+ */
+import axios from 'axios'
 
 /**
  * Frontend plugins loading
  */
 import 'slick-carousel'
-import sweetalert2 from 'sweetalert2'
+import swal from 'sweetalert2'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
-window.swal = sweetalert2
+window.axios = axios
 
 Vue.use(BootstrapVue)
 
@@ -34,7 +42,7 @@ new Vue().$mount('#app');
   })
 
   $('button.sweet').click(() => {
-    window.swal({
+    swal({
       title: 'Yo!',
       text: 'Yeaaah!',
       type: 'success',
