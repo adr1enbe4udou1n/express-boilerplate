@@ -14,7 +14,7 @@ import axios from 'axios'
 import 'slick-carousel'
 import swal from 'sweetalert2'
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
+import BootstrapVue from 'bootstrap-vue'
 
 window.axios = axios
 
