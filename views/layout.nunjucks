@@ -7,8 +7,8 @@
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    {% if not hmr %}
-    <link rel="stylesheet" href="{{ assets('css/app.css') }}">
+    {% if asset('app.css') %}
+    <link rel="stylesheet" href="{{ asset('app.css') }}">
     {% endif %}
   </head>
   <body>
@@ -24,9 +24,9 @@
       {% include "partials/footer.nunjucks" %}
     </div>
 
-    <script src="{{ assets('js/manifest.js') }}"></script>
-    <script src="{{ assets('js/vendor.js') }}"></script>
-    <script src="{{ assets('js/app.js') }}"></script>
+    <script src="{{ asset('manifest.js') }}"></script>
+    <script src="{{ asset('vendor.js') }}"></script>
+    <script src="{{ asset('app.js') }}"></script>
 
     {% block scripts %}{% endblock %}
   </body>

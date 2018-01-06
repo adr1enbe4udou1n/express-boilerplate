@@ -7,15 +7,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
-const production = process.env.NODE_ENV === 'production'
 const hmr = process.argv.includes('--hot')
+const production = process.env.NODE_ENV === 'production'
+const devServerPort = parseInt(process.env.DEV_SERVER_PORT || '8080', 10)
 
-const expressPort = parseInt(process.env.PORT || '3000', 10)
-const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10)
-const browserSyncPort = parseInt(process.env.BROWSERSYNC_PORT || '7000', 10)
-const browserSyncHost = process.env.BROWSERSYNC_HOST || 'localhost'
+const publicPathFolder = production ? '/dist/' : '/build/'
+const publicPath = hmr ? `http://localhost:${devServerPort}${publicPathFolder}` : publicPathFolder
 
 module.exports = {
   entry: {
@@ -25,9 +23,9 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: production ? 'dist/js/[name].[chunkhash].js' : 'js/[name].js',
-    publicPath: hmr ? `http://localhost:${webpackDevServerPort}/` : '/'
+    path: path.resolve(__dirname, 'public' + publicPathFolder),
+    filename: production ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+    publicPath
   },
   module: {
     rules: [
@@ -122,50 +120,31 @@ module.exports = {
       Popper: ['popper.js', 'default']
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: production,
-      options: {
-        context: __dirname,
-        output: { path: './' }
-      }
+      minimize: production
     }),
-    new FriendlyErrorsPlugin(),
+    new FriendlyErrorsPlugin({
+      clearConsole: false
+    }),
     new WebpackNotifierPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module, count) {
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, './node_modules')
-          ) === 0
-        )
+      minChunks: (module) => {
+        return module.context && module.context.includes('node_modules')
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      chunks: ['vendor']
+      minChunks: Infinity
     }),
     new ExtractTextPlugin({
-      filename: production ? 'dist/css/[name].[contenthash].css' : 'css/[name].css',
-      allChunks: true,
+      filename: production ? 'css/[name].[contenthash].css' : 'css/[name].css',
+      allChunks: false,
       disable: hmr
     }),
-    new BrowserSyncPlugin(
-      {
-        host: browserSyncHost,
-        port: browserSyncPort,
-        open: browserSyncHost === 'localhost' ? 'local' : 'external',
-        proxy: `http://localhost:${expressPort}/`,
-        files: [
-          'public/js/**/*.js',
-          'public/css/**/*.css'
-        ]
-      },
-      {
-        reload: false
-      }
-    )
+    new ManifestPlugin({
+      publicPath,
+      writeToFileEmit: true
+    })
   ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -176,17 +155,20 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: production ? 'source-map' : 'inline-source-map',
   devServer: {
+    contentBase: path.resolve(__dirname, 'public'),
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    contentBase: path.resolve('public'),
     historyApiFallback: true,
-    noInfo: true,
     compress: true,
+    noInfo: true,
     quiet: true,
-    port: webpackDevServerPort
+    watchOptions: {
+      ignored: /node_modules/
+    },
+    port: devServerPort
   }
 }
 
@@ -209,8 +191,7 @@ if (production) {
       parallel: true,
       sourceMap: true
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new ManifestPlugin()
+    new webpack.optimize.ModuleConcatenationPlugin()
   ]
 }
 

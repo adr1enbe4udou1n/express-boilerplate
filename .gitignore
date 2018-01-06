@@ -1,5 +1,4 @@
-/public/css
-/public/js
+/public/build
 
 node_modules/
 

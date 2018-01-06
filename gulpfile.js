@@ -5,14 +5,11 @@ const nodemon = require('gulp-nodemon')
 const livereload = require('gulp-livereload')
 
 gulp.task('serve', () => {
-  const hmr = process.argv.includes('--hot')
-
   livereload.listen()
 
   // start express app
   nodemon({
     script: 'bin/www',
-    args: hmr ? ['--hot'] : [],
     ext: 'js nunjucks',
     ignore: [
       'assets/',

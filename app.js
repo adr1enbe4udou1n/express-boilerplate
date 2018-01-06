@@ -7,29 +7,19 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const connectLivereload = require('connect-livereload')
 
-const manifest = require('./public/manifest.json')
 const routes = require('./routes/web')
 const nunjucks = require('nunjucks')
 
 const app = express()
 
-const development = process.env.NODE_ENV === 'development'
-const hmr = process.argv.includes('--hot')
-const webpackDevServerPort = parseInt(process.env.WEBPACKDEVSERVER_PORT || '5000', 10)
+const development = process.env.NODE_ENV !== 'production'
 
-app.locals.hmr = hmr
+app.locals.asset = (path) => {
+  let basePath = development ? 'build' : 'dist'
 
-app.locals.assets = (path) => {
-  if (development) {
-    if (hmr) {
-      return `//localhost:${webpackDevServerPort}/${path}`
-    }
+  const manifest = require(`./public/${basePath}/manifest.json`)
 
-    return `/${path}`
-  }
-
-  let basename = path.split('/').reverse()[0]
-  return `/${manifest[basename]}`
+  return manifest[path]
 }
 
 // specific dev environnement
