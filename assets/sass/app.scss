@@ -4,12 +4,12 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
-@import "~bootstrap-vue/dist/bootstrap-vue.css";
+@import "~bootstrap-vue/dist/bootstrap-vue";
 
 // Plugins
 @import "~sweetalert2/src/sweetalert2";
-@import "~slick-carousel/slick/slick.scss";
-@import "~slick-carousel/slick/slick-theme.scss";
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
 
 /* Space out content a bit */
 body {

@@ -1,22 +1,33 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    parser: 'babel-eslint',
   },
   env: {
     browser: true,
     jquery: true
   },
-  extends: 'standard',
+  extends: [
+    'plugin:vue/recommended',
+    'standard'
+  ],
   plugins: [
-    'html',
-    'import'
+    'vue'
   ],
   rules: {
-    'arrow-parens': 0,
-    'generator-star-spacing': 0,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'prefer-arrow-callback': 2
+    'arrow-parens': 'error',
+    'generator-star-spacing': 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'prefer-arrow-callback': 'error',
+    'vue/max-attributes-per-line': 'off',
+    'vue/html-self-closing': ['error', {
+      html: {
+        void: 'never',
+        normal: 'never',
+        component: 'never'
+      },
+      svg: 'never',
+      math: 'never'
+    }]
   }
 }
