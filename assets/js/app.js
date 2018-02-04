@@ -9,12 +9,18 @@ import 'bootstrap'
 import axios from 'axios'
 
 /**
+ * Vue Init
+ */
+import Vue from 'vue'
+
+import 'babel-polyfill'
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
+
+/**
  * Frontend plugins loading
  */
 import 'slick-carousel'
 import swal from 'sweetalert2'
-import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
 window.axios = axios
 
