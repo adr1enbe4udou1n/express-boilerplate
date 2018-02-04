@@ -80,8 +80,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'images/[name].[ext]?[hash]',
-              publicPath
+              name: 'images/[name].[ext]?[hash]'
             }
           },
           {
@@ -96,8 +95,7 @@ module.exports = {
         test: /\.(woff2?|ttf|eot|svg|otf)$/,
         loader: 'file-loader',
         options: {
-          name: 'fonts/[name].[ext]?[hash]',
-          publicPath
+          name: 'fonts/[name].[ext]?[hash]'
         }
       }
     ]
