@@ -1,6 +1,6 @@
 {
-  "app.css": "/dist/css/app.7bb53625f678900c36a1c1034b69a426.css",
-  "app.css.map": "/dist/css/app.7bb53625f678900c36a1c1034b69a426.css.map",
+  "app.css": "/dist/css/app.e4a6aad1c9584a87b3b783620771e327.css",
+  "app.css.map": "/dist/css/app.e4a6aad1c9584a87b3b783620771e327.css.map",
   "app.js": "/dist/js/app.2bb39b9de9ceb1eadcc8.js",
   "app.js.map": "/dist/js/app.2bb39b9de9ceb1eadcc8.js.map",
   "fonts\\fontawesome-webfont.eot": "/dist/fonts/fontawesome-webfont.eot?674f50d287a8c48dc19ba404d20fe713",
@@ -15,6 +15,6 @@
   "images\\ajax-loader.gif": "/dist/images/ajax-loader.gif?68b0c4fcb84d239f261c1a5e65818142",
   "manifest.js": "/dist/js/manifest.5debedc3ef778bd47529.js",
   "manifest.js.map": "/dist/js/manifest.5debedc3ef778bd47529.js.map",
-  "vendor.js": "/dist/js/vendor.c16b7ac143b3e0bb9735.js",
-  "vendor.js.map": "/dist/js/vendor.c16b7ac143b3e0bb9735.js.map"
+  "vendor.js": "/dist/js/vendor.240d3fe7c853b9e082a3.js",
+  "vendor.js.map": "/dist/js/vendor.240d3fe7c853b9e082a3.js.map"
 }
