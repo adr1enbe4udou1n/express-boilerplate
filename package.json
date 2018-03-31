@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Lite Frontend boilerplate based on Bootstrap 4, with Webpack for assets management and Nunjucks as template engine.",
   "scripts": {
-    "build": "rimraf public/build && webpack --mode development --progress --hide-modules",
+    "build": "rimraf public/build && webpack --mode development --progress",
     "watch": "npm-run-all --parallel watch:build serve",
-    "watch:build": "rimraf public/build && webpack --mode development --watch --progress --hide-modules",
+    "watch:build": "rimraf public/build && webpack --mode development --watch --progress",
     "dev": "npm-run-all --parallel dev:build serve",
     "dev:build": "webpack-dev-server --mode development --hot",
     "serve": "gulp serve",
-    "prod": "rimraf public/dist && cross-env NODE_ENV=production webpack --mode production --progress --hide-modules",
+    "prod": "rimraf public/dist && cross-env NODE_ENV=production webpack --mode production --progress",
     "start": "cross-env NODE_ENV=production node ./bin/www"
   },
   "engines": {
