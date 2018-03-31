@@ -2,9 +2,7 @@ require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
@@ -31,30 +29,33 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
+        use: [
+          production ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
             loader: 'css-loader',
             options: {
               minimize: production,
               sourceMap: true
             }
-          }, {
+          },
+          {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               sourceMap: true
             }
-          }, {
+          },
+          {
             loader: 'resolve-url-loader'
-          }, {
+          },
+          {
             loader: 'sass-loader',
             options: {
               outputStyle: 'expanded',
               sourceMap: true
             }
-          }]
-        })
+          }
+        ]
       },
       {
         test: /\.(js|vue)$/,
@@ -100,6 +101,17 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          name: `vendor`,
+          chunks: 'all'
+        }
+      }
+    }
+  },
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -107,24 +119,9 @@ module.exports = {
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default']
     }),
-    new FriendlyErrorsPlugin({
-      clearConsole: false
-    }),
     new WebpackNotifierPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: (module) => {
-        return module.context && module.context.includes('node_modules')
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: Infinity
-    }),
-    new ExtractTextPlugin({
-      filename: production ? 'css/[name].[contenthash].css' : 'css/[name].css',
-      allChunks: false,
-      disable: hmr
+    new MiniCssExtractPlugin({
+      filename: '[name].[chunkhash].css'
     }),
     new ManifestPlugin({
       publicPath,
@@ -156,29 +153,3 @@ module.exports = {
     port: devServerPort
   }
 }
-
-let plugins = []
-
-if (hmr) {
-  plugins = [
-    new webpack.NamedModulesPlugin()
-  ]
-}
-
-if (production) {
-  plugins = [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new UglifyJsPlugin({
-      parallel: true,
-      sourceMap: true
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin()
-  ]
-}
-
-module.exports.plugins.push(...plugins)
