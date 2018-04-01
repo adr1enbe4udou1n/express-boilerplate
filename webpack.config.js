@@ -121,7 +121,7 @@ module.exports = {
     }),
     new WebpackNotifierPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash].css'
+      filename: production ? 'css/[name].[chunkhash].css' : 'css/[name].css'
     }),
     new ManifestPlugin({
       publicPath,
