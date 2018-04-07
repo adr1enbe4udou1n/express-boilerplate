@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
@@ -119,6 +120,7 @@ module.exports = {
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default']
     }),
+    new FriendlyErrorsWebpackPlugin(),
     new WebpackNotifierPlugin(),
     new MiniCssExtractPlugin({
       filename: production ? 'css/[name].[chunkhash].css' : 'css/[name].css'
