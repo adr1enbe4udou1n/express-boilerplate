@@ -15,6 +15,24 @@ const devServerPort = parseInt(process.env.DEV_SERVER_PORT || '8080', 10)
 const publicPathFolder = production ? '/dist/' : '/build/'
 const publicPath = hmr ? `http://localhost:${devServerPort}${publicPathFolder}` : publicPathFolder
 
+let cssLoaders = [
+  production ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: production,
+      sourceMap: true
+    }
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      ident: 'postcss',
+      sourceMap: true
+    }
+  }
+]
+
 module.exports = {
   entry: {
     app: [
@@ -30,23 +48,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: cssLoaders
+      },
+      {
         test: /\.scss$/,
-        use: [
-          production ? MiniCssExtractPlugin.loader : 'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: production,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              sourceMap: true
-            }
-          },
+        use: cssLoaders.concat([
           {
             loader: 'resolve-url-loader'
           },
@@ -57,7 +64,7 @@ module.exports = {
               sourceMap: true
             }
           }
-        ]
+        ])
       },
       {
         test: /\.(js|vue)$/,
